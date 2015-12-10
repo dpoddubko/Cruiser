@@ -16,7 +16,7 @@ public class AllCruiserApp {
         cruiser.turnLeft();
         cruiser.attack();
         System.out.println("");
-
+     System.out.println();
         cruiser = protectedCr;
         cruiser.goForward();
         cruiser.turnRight();
