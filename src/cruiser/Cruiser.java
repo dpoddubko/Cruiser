@@ -4,5 +4,5 @@ interface Cruiser {
     void goForward();
     void turnRight();
     void turnLeft();
-    void attack();
+    void attack(AllCruiser anyCruiser);
 }

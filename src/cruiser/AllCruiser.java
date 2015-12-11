@@ -3,10 +3,10 @@ package cruiser;
 import java.util.SortedMap;
 
 abstract class AllCruiser implements Cruiser {
-    private int speed;//скорость движения  крейсера
-    private int lifeSum;//количество жизней крейсера
-    private int damage;//урон, который наносит данный крейсер другому за одну атаку
-    private String name;//имя крейсера
+    private int speed;
+    private int lifeSum;
+    private int damage;
+    private String name;
 
     public void setDamage(int damage) {
         this.damage = damage;
@@ -23,7 +23,7 @@ abstract class AllCruiser implements Cruiser {
     public void setLifeSum(int lifeSum) {
         this.lifeSum = lifeSum;
     }
-//движение вперед
+
     public void goForward() {
         if (lifeSum > (lifeSum / 3)) {
             System.out.println("Скорость передвижения крейсера: " +
@@ -32,26 +32,16 @@ abstract class AllCruiser implements Cruiser {
             System.out.println("Крейсер двигаться не может");
         }
     }
-// проверка жив корабль или погиб
-    public boolean alive() {
-        if (lifeSum > 0) {
-            //Крейсер живой
-            return true;
-        } else {
-            //"Крейсер погиб!
-            return false;
-        }
-    }
-//поворот вправо
+    public boolean alive() { return lifeSum>0 ? true : false; }
+
     public void turnRight() {
 
     }
-//поворот влево
     public void turnLeft() {
 
     }
-//
-    public void attack() {
+
+    public void attack(AllCruiser anyCruiser) {
         if (alive()){
             System.out.println("Можем атаковать!");
         }else{
