@@ -32,7 +32,8 @@ abstract class AllCruiser implements Cruiser {
 
     }
 
-    public void attack(AllCruiser anyCruiser) {
+@Override
+    public void attack(Cruiser anyCruiser) {
         if (alive()){
             System.out.println("Можем атаковать!");
         }else{
