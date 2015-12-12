@@ -8,21 +8,12 @@ abstract class AllCruiser implements Cruiser {
     private int damage;
     private String name;
 
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSpeed(int speed) {
+    public AllCruiser(int speed, int lifeSum, String name, int damage) {
         this.speed = speed;
-    }
-
-    public void setLifeSum(int lifeSum) {
         this.lifeSum = lifeSum;
-    }
+        this.name = name;
+        this.damage = damage;
+            }
 
     public void goForward() {
         if (lifeSum > (lifeSum / 3)) {
