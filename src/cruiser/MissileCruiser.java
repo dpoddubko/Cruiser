@@ -1,6 +1,6 @@
 package cruiser;
 
-class MissileCruiser extends AllCruiser {
+public class MissileCruiser extends AllCruiser {
     private static final String NAME = "Ракетный крейсер";
 
     public MissileCruiser() {

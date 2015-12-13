@@ -10,6 +10,9 @@ public class AllCruiserApp {
         protectedCr.display();
         crHelicopter.display();
 
+        protectedCr.attack(MissileCruiser missileCr);
+
+
 
     }
 }
