@@ -3,24 +3,30 @@ package cruiser;
 import java.util.SortedMap;
 
 public abstract class AllCruiser implements Cruiser {
-    private int speed;
+    final private int SPEED;
+    final private int INITIALLIFE;
+    final private int DAMAGE;
+    final private String NAME;
     private int lifeSum;
-    private int damage;
-    private String name;
 
-    public AllCruiser(int speed, int lifeSum, String name, int damage) {
-        this.speed = speed;
-        this.lifeSum = lifeSum;
-        this.name = name;
-        this.damage = damage;
+    public AllCruiser(int speed, int initialLife, String name, int damage) {
+        this.SPEED = speed;
+        this.INITIALLIFE = initialLife;
+        this.lifeSum = initialLife;
+        this.NAME = name;
+        this.DAMAGE = damage;
+    }
+
+    public void log(String msg) {
+        System.out.println(msg);
     }
 
     public void goForward() {
-        if (lifeSum > (lifeSum / 3)) {
-            System.out.println("Скорость передвижения крейсера: " +
-                    speed + " узлов.");
+        if (lifeSum > (INITIALLIFE / 3)) {
+            log("Скорость передвижения крейсера: " +
+                    SPEED + " узлов.");
         } else {
-            System.out.println("Крейсер двигаться не может");
+            log("Крейсер двигаться не может");
         }
     }
 
@@ -36,21 +42,22 @@ public abstract class AllCruiser implements Cruiser {
 
     }
 
-    @Override
-    public void attack(Cruiser anyCruiser) {
+   // @Override
+    public void attack(AllCruiser anyCruiser) {
         if (alive()) {
-            System.out.println("Можем атаковать!");
-        } else {
-            System.out.println(" Погибший крейсер не может атаковать!");
-        }
+anyCruiser.lifeSum--;
+           log("lifeSum "+anyCruiser.lifeSum);
+           log("initialLife "+anyCruiser.INITIALLIFE);
 
+        }
     }
 
     public void display() {
-        System.out.println(name + ": ");
-        System.out.println("Скорость движения: " + speed + " узлов.");
-        System.out.println("Количество жизней: " + lifeSum + ".");
-        System.out.println("За один выстрел наносит урон " + damage + " бал(а).");
-        System.out.println("");
+        log(NAME + ": ");
+        log("Скорость движения: " + SPEED + " узлов.");
+        log("Начальное количество жизней: " + INITIALLIFE + ".");
+        log("Оставшееся количество жизней: " + lifeSum + ".");
+        log("За один выстрел наносит урон " + DAMAGE + " бал(а).");
+        log("");
     }
 }

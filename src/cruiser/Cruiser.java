@@ -1,11 +1,12 @@
 package cruiser;
 
-interface Cruiser {
+interface Cruiser{
+
     void goForward();
 
     void turnRight();
 
     void turnLeft();
 
-    void attack(Cruiser anyCruiser);
+    //void attack(Cruiser anyCruiser);
 }

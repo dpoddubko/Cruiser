@@ -2,17 +2,21 @@ package cruiser;
 
 public class AllCruiserApp {
     public static void main(String[] args) {
-        MissileCruiser missileCr = new MissileCruiser();
-        ProtectedCruisers protectedCr = new ProtectedCruisers();
-        CruiserHelicopterCarriers crHelicopter = new CruiserHelicopterCarriers();
+        ShipFactory factory = new ShipFactory();
+        factory.addMissileCruiser();
+        factory.addMissileCruiser();
+        factory.addMissileCruiser();
 
-        missileCr.display();
-        protectedCr.display();
-        crHelicopter.display();
+        factory.addProtectedCruisers();
+        factory.addProtectedCruisers();
 
-        protectedCr.attack(MissileCruiser missileCr);
+        factory.addCruiserHelicopterCarriers();
 
+        factory.displayAll();
 
+        System.out.println(factory.getListMissileCr());
 
+        factory.listMissileCr.get(1).attack(factory.listMissileCr.get(2));
+        factory.displayMissileCruisers();
     }
 }
