@@ -42,12 +42,17 @@ public abstract class AllCruiser implements Cruiser {
 
     }
 
-   // @Override
-    public void attack(AllCruiser anyCruiser) {
+    public void decreaseLife(int DAMAGE) {
+        lifeSum=lifeSum-DAMAGE;
+    }
+
+    // @Override
+    public void attack(Cruiser anyCruiser) {
         if (alive()) {
-anyCruiser.lifeSum--;
-           log("lifeSum "+anyCruiser.lifeSum);
-           log("initialLife "+anyCruiser.INITIALLIFE);
+            anyCruiser.decreaseLife(DAMAGE);
+
+            //log("lifeSum "+anyCruiser.lifeSum);
+            //log("initialLife "+anyCruiser.INITIALLIFE);
 
         }
     }

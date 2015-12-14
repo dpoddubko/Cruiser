@@ -1,6 +1,6 @@
 package cruiser;
 
-interface Cruiser{
+interface Cruiser {
 
     void goForward();
 
@@ -8,5 +8,7 @@ interface Cruiser{
 
     void turnLeft();
 
-    //void attack(Cruiser anyCruiser);
+    void attack(Cruiser anyCruiser);
+
+    void decreaseLife(int damage);
 }
