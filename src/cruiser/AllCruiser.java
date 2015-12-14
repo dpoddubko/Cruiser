@@ -1,20 +1,18 @@
 package cruiser;
 
-import java.util.SortedMap;
-
 public abstract class AllCruiser implements Cruiser {
-    final private int SPEED;
-    final private int INITIALLIFE;
-    final private int DAMAGE;
-    final private String NAME;
+    private final int speed;
+    private final int initialLife;
+    private final int damage;
+    private final String name;
     private int lifeSum;
 
     public AllCruiser(int speed, int initialLife, String name, int damage) {
-        this.SPEED = speed;
-        this.INITIALLIFE = initialLife;
+        this.speed = speed;
+        this.initialLife = initialLife;
         this.lifeSum = initialLife;
-        this.NAME = name;
-        this.DAMAGE = damage;
+        this.name = name;
+        this.damage = damage;
     }
 
     public void log(String msg) {
@@ -22,9 +20,9 @@ public abstract class AllCruiser implements Cruiser {
     }
 
     public void goForward() {
-        if (lifeSum > (INITIALLIFE / 3)) {
+        if (lifeSum > (initialLife / 3)) {
             log("Скорость передвижения крейсера: " +
-                    SPEED + " узлов.");
+                    speed + " узлов.");
         } else {
             log("Крейсер двигаться не может");
         }
@@ -42,27 +40,24 @@ public abstract class AllCruiser implements Cruiser {
 
     }
 
-    public void decreaseLife(int DAMAGE) {
-        lifeSum=lifeSum-DAMAGE;
+    public void decreaseLife(int damage) {
+        lifeSum-=damage;
     }
 
-    // @Override
-    public void attack(Cruiser anyCruiser) {
+    @Override
+    public void attack(Cruiser cruiser) {
         if (alive()) {
-            anyCruiser.decreaseLife(DAMAGE);
-
-            //log("lifeSum "+anyCruiser.lifeSum);
-            //log("initialLife "+anyCruiser.INITIALLIFE);
+            cruiser.decreaseLife(damage);
 
         }
     }
 
     public void display() {
-        log(NAME + ": ");
-        log("Скорость движения: " + SPEED + " узлов.");
-        log("Начальное количество жизней: " + INITIALLIFE + ".");
+        log(name + ": ");
+        log("Скорость движения: " + speed + " узлов.");
+        log("Начальное количество жизней: " + initialLife + ".");
         log("Оставшееся количество жизней: " + lifeSum + ".");
-        log("За один выстрел наносит урон " + DAMAGE + " бал(а).");
+        log("За один выстрел наносит урон " + damage + " бал(а).");
         log("");
     }
 }

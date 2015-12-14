@@ -8,7 +8,7 @@ interface Cruiser {
 
     void turnLeft();
 
-    void attack(Cruiser anyCruiser);
+    void attack(Cruiser cruiser);
 
     void decreaseLife(int damage);
 }

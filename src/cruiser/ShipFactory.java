@@ -1,57 +1,56 @@
 package cruiser;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class ShipFactory {
-    LinkedList<MissileCruiser> listMissileCr = new LinkedList<MissileCruiser>();
-    LinkedList<ProtectedCruiser> listProtectCr = new LinkedList<ProtectedCruiser>();
-    LinkedList<CruiserHelicopterCarriers> listHelicopterCr = new LinkedList<CruiserHelicopterCarriers>();
+    private List<MissileCruiser> listMissileCr = new LinkedList<MissileCruiser>();
+    private List<ProtectedCruiser> listProtectCr = new LinkedList<ProtectedCruiser>();
+    private List<CruiserHelicopterCarriers> listHelicopterCr = new LinkedList<CruiserHelicopterCarriers>();
 
-    void addMissileCruiser() {
+    public List<MissileCruiser> getListMissileCr() {
+        return listMissileCr;
+    }
+
+    public List<ProtectedCruiser> getListProtectCr() {
+        return listProtectCr;
+    }
+
+    public List<CruiserHelicopterCarriers> getListHelicopterCr() {
+        return listHelicopterCr;
+    }
+
+    public void addMissileCruiser() {
         listMissileCr.add(new MissileCruiser());
     }
 
-    void addProtectedCruisers() {
+    public void addProtectedCruisers() {
         listProtectCr.add(new ProtectedCruiser());
     }
 
-    void addCruiserHelicopterCarriers() {
+    public void addCruiserHelicopterCarriers() {
         listHelicopterCr.add(new CruiserHelicopterCarriers());
     }
 
-    //---------display--------
-    void displayMissileCruisers() {
+    public void displayMissileCruisers() {
         for (MissileCruiser lm : listMissileCr)
             lm.display();
     }
 
-    void displayProtectedCruisers() {
+    public void displayProtectedCruisers() {
         for (ProtectedCruiser lp : listProtectCr)
             lp.display();
     }
 
-    void displaylistHelicopterCrs() {
+    public void displaylistHelicopterCrs() {
         for (CruiserHelicopterCarriers lh : listHelicopterCr)
             lh.display();
     }
 
-    void displayAll() {
+    public void displayAll() {
         displayMissileCruisers();
         displayProtectedCruisers();
         displaylistHelicopterCrs();
-    }
-
-    //--------------------------
-    int getListMissileCr() {
-        return listMissileCr.size();
-    }
-
-    int getListProtectCr() {
-        return listProtectCr.size();
-    }
-
-    int getListHelicopterCr() {
-        return listHelicopterCr.size();
     }
 }
 

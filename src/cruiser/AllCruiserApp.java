@@ -14,10 +14,7 @@ public class AllCruiserApp {
 
         factory.displayAll();
 
-        System.out.println(factory.getListMissileCr());
-        System.out.println(factory.getListProtectCr());
-
-        factory.listMissileCr.get(1).attack(factory.listProtectCr.get(1));
+        factory.getListMissileCr().get(1).attack(factory.getListProtectCr().get(1));
         factory.displayMissileCruisers();
         factory.displayProtectedCruisers();
     }
