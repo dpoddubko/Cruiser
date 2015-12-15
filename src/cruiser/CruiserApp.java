@@ -1,6 +1,6 @@
 package cruiser;
 
-public class AllCruiserApp {
+public class CruiserApp {
     public static void main(String[] args) {
         ShipFactory factory = new ShipFactory();
         factory.addMissileCruiser();

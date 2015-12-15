@@ -1,6 +1,6 @@
-package cruiser;
+package gun;
 
-public class MissileSystem extends AllGuns {
+public class MissileSystem extends BaseGun {
     public MissileSystem() {
         super("Ракетная установка", 5, 20000);
     }

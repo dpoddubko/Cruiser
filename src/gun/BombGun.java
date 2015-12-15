@@ -1,6 +1,6 @@
-package cruiser;
+package gun;
 
-public class BombGun extends AllGuns {
+public class BombGun extends BaseGun {
     public BombGun() {
         super("Бомбомет", 10, 25000);
     }

@@ -1,11 +1,11 @@
-package cruiser;
+package gun;
 
-public abstract class AllGuns implements GunsOfCruisers{
+public abstract class BaseGun implements Gun {
     private final String nameOfGun;
     private final int damage;
     private final int distanceOfFire;
 
-    public AllGuns(String nameOfGun, int damage, int distanceOfFire) {
+    public BaseGun(String nameOfGun, int damage, int distanceOfFire) {
         this.nameOfGun = nameOfGun;
         this.damage = damage;
         this.distanceOfFire = distanceOfFire;

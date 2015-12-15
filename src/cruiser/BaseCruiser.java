@@ -1,6 +1,6 @@
 package cruiser;
 
-public abstract class AllCruiser implements Cruiser {
+public abstract class BaseCruiser implements Cruiser {
     private final int speed;
     private final int initialLife;
     private final String name;
@@ -9,7 +9,7 @@ public abstract class AllCruiser implements Cruiser {
     private int bullet;
     private int bomb;
 
-    public AllCruiser(int speed, int initialLife, String name, int missile, int bullet, int bomb) {
+    public BaseCruiser(int speed, int initialLife, String name, int missile, int bullet, int bomb) {
         this.speed = speed;
         this.initialLife = initialLife;
         this.lifeSum = initialLife;

@@ -1,6 +1,6 @@
 package cruiser;
 
-public class MissileCruiser extends AllCruiser {
+public class MissileCruiser extends BaseCruiser {
 
     public MissileCruiser() {
 

@@ -1,6 +1,6 @@
-package cruiser;
+package gun;
 
-public interface GunsOfCruisers {
+public interface Gun {
     public String getNameOfGun();
 
     public int getDamage();
