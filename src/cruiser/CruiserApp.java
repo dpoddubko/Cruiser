@@ -1,7 +1,5 @@
 package cruiser;
 
-import gunTool.ListGunTool;
-
 public class CruiserApp {
     public static void main(String[] args) {
         ShipFactory factory = new ShipFactory();

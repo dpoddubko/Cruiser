@@ -1,13 +1,13 @@
 package cruiser;
 
-import gunTool.ListGunTool;
+import gunTool.WeaponBuilder;
 
 public class CruiserHelicopterCarriers extends BaseCruiser {
 
     public CruiserHelicopterCarriers() {
         super(15, 90, "Крейсер-вертолетоносец");
-        ListGunTool lgt = new ListGunTool();
-        lgt.addBombGunTool();
-        lgt.addMashineGunTool();
+        WeaponBuilder lgt = new WeaponBuilder();
+        lgt.loadBomb(20);
+        lgt.loadMashineGun(200);
     }
 }

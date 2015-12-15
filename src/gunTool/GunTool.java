@@ -1,19 +1,35 @@
 package gunTool;
 
-import gun.BombGun;
-import gun.MachineGun;
-import gun.MissileSystem;
+import gun.*;
 
-public class GunTool extends BaseGunTool {
-    public GunTool(BombGun gun) {
-        super(10, gun);
+public class GunTool implements IGunTool {
+    private int numberOfCharge;
+    private Gun gun;
+
+    public GunTool(int numberOfCharge, BombGun gun) {
+        this.numberOfCharge = numberOfCharge;
+        this.gun = gun;
     }
 
-    public GunTool(MachineGun gun) {
-        super(300, gun);
+    public GunTool(int numberOfCharge, MachineGun gun) {
+        this.numberOfCharge = numberOfCharge;
+        this.gun = gun;
     }
 
-    public GunTool(MissileSystem gun) {
-        super(15, gun);
+    public GunTool(int numberOfCharge, MissileSystem gun) {
+        this.numberOfCharge = numberOfCharge;
+        this.gun = gun;
+    }
+
+    public Gun getGun() {
+        return gun;
+    }
+
+    public int getCount() {
+        return numberOfCharge;
+    }
+
+    public void decreaseCount() {
+        numberOfCharge--;
     }
 }

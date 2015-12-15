@@ -1,14 +1,14 @@
 package cruiser;
 
-import gunTool.ListGunTool;
+import gunTool.WeaponBuilder;
 
 public class MissileCruiser extends BaseCruiser {
 
     public MissileCruiser() {
         super(30, 60, "Ракетный крейсер");
-        ListGunTool lgt = new ListGunTool();
-        lgt.addMashineGunTool();
-        lgt.addMissleTool();
+        WeaponBuilder lgt = new WeaponBuilder();
+        lgt.loadMashineGun(150);
+        lgt.loadMissle(10);
     }
 
 }
