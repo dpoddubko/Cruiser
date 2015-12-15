@@ -5,18 +5,12 @@ public abstract class BaseCruiser implements Cruiser {
     private final int initialLife;
     private final String name;
     private int lifeSum;
-    private int missile;
-    private int bullet;
-    private int bomb;
 
-    public BaseCruiser(int speed, int initialLife, String name, int missile, int bullet, int bomb) {
+    public BaseCruiser(int speed, int initialLife, String name) {
         this.speed = speed;
         this.initialLife = initialLife;
         this.lifeSum = initialLife;
         this.name = name;
-        this.missile = missile;
-        this.bullet = bullet;
-        this.bomb = bomb;
     }
 
     public void log(String msg) {
