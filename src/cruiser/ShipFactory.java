@@ -1,12 +1,12 @@
 package cruiser;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShipFactory {
-    private List<MissileCruiser> listMissileCr = new LinkedList<MissileCruiser>();
-    private List<ProtectedCruiser> listProtectCr = new LinkedList<ProtectedCruiser>();
-    private List<CruiserHelicopterCarriers> listHelicopterCr = new LinkedList<CruiserHelicopterCarriers>();
+    private List<MissileCruiser> listMissileCr = new ArrayList<MissileCruiser>();
+    private List<ProtectedCruiser> listProtectCr = new ArrayList<ProtectedCruiser>();
+    private List<CruiserHelicopterCarriers> listHelicopterCr = new ArrayList<CruiserHelicopterCarriers>();
 
     public List<MissileCruiser> getListMissileCr() {
         return listMissileCr;
