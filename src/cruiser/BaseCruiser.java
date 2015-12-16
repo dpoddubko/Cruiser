@@ -8,13 +8,14 @@ public abstract class BaseCruiser implements Cruiser {
     private final int speed;
     private final int initialLife;
     private final String name;
-    private int lifeSum;
     private final List<GunTool> weaponsList;
+
+    private int lifes;
 
     public BaseCruiser(int speed, int initialLife, String name, List<GunTool> weaponsList) {
         this.speed = speed;
         this.initialLife = initialLife;
-        this.lifeSum = initialLife;
+        this.lifes = initialLife;
         this.name = name;
         this.weaponsList = weaponsList;
     }
@@ -24,18 +25,18 @@ public abstract class BaseCruiser implements Cruiser {
     }
 
     public void goForward() {
-        if (lifeSum > (initialLife / 3)) {
+        if (lifes > (initialLife / 3)) {
             log("Скорость передвижения крейсера: " +
                     speed + " узлов.");
         }
     }
 
     public boolean alive() {
-        return lifeSum > 0;
+        return lifes > 0;
     }
 
     public void decreaseLife(int damage) {
-        lifeSum -= damage;
+        lifes -= damage;
     }
 
     public void attack(Cruiser cruiser) {
@@ -47,7 +48,7 @@ public abstract class BaseCruiser implements Cruiser {
         log(name + ": ");
         log("Скорость движения: " + speed + " узлов.");
         log("Начальное количество жизней: " + initialLife + ".");
-        log("Оставшееся количество жизней: " + lifeSum + ".");
+        log("Оставшееся количество жизней: " + lifes + ".");
         log("");
     }
 }
