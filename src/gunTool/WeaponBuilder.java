@@ -25,7 +25,7 @@ public class WeaponBuilder {
         return this;
     }
 
-    public List build() {
+    public List<GunTool> build() {
         return weapon;
     }
 }

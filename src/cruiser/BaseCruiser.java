@@ -1,16 +1,22 @@
 package cruiser;
 
+import gunTool.GunTool;
+
+import java.util.List;
+
 public abstract class BaseCruiser implements Cruiser {
     private final int speed;
     private final int initialLife;
     private final String name;
     private int lifeSum;
+    private final List<GunTool> weaponsList;
 
-    public BaseCruiser(int speed, int initialLife, String name) {
+    public BaseCruiser(int speed, int initialLife, String name, List<GunTool> weaponsList) {
         this.speed = speed;
         this.initialLife = initialLife;
         this.lifeSum = initialLife;
         this.name = name;
+        this.weaponsList = weaponsList;
     }
 
     public void log(String msg) {
