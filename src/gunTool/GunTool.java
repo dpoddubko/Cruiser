@@ -20,6 +20,7 @@ public class GunTool implements IGunTool {
     }
 
     public void decreaseNumberOfCharge() {
-        --this.numberOfCharge;
+        if (numberOfCharge>0)
+        --numberOfCharge;
     }
 }
