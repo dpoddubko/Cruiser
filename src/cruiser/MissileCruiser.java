@@ -8,6 +8,7 @@ public class MissileCruiser extends BaseCruiser {
         super(30, 60, "Ракетный крейсер", new WeaponBuilder().
                 loadMashineGun(150).
                 loadMissle(10).
+                loadBomb(2).
                 build());
     }
 }

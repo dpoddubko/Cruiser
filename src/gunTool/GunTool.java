@@ -15,11 +15,11 @@ public class GunTool implements IGunTool {
         return gun;
     }
 
-    public int getCount() {
+    public int getNumberOfCharge() {
         return numberOfCharge;
     }
 
-    public void decreaseCount() {
-        numberOfCharge--;
+    public void decreaseNumberOfCharge() {
+        --this.numberOfCharge;
     }
 }

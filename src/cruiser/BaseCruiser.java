@@ -10,6 +10,9 @@ public abstract class BaseCruiser implements Cruiser {
     private final String name;
     private final List<GunTool> weaponsList;
 
+    private static int countFireGlob = 1;
+
+    private int countFireCruiser = 0;
     private int lifes;
 
     public BaseCruiser(int speed, int initialLife, String name, List<GunTool> weaponsList) {
@@ -39,8 +42,31 @@ public abstract class BaseCruiser implements Cruiser {
         lifes -= damage;
     }
 
+    public GunTool GetTheBestGun() {
+        GunTool defoltGun = weaponsList.get(0);
+        GunTool TheBestGun = null;
+        int defoltDamage = 0;
+        for (GunTool w : weaponsList) {
+            if (w.getNumberOfCharge() > 0 && w.getGun().getDamage() > defoltDamage) {
+                defoltDamage = w.getGun().getDamage();
+                TheBestGun = w;
+            } else {
+                TheBestGun = defoltGun;
+            }
+        }
+        return TheBestGun;
+    }
+
     public void attack(Cruiser cruiser) {
         if (alive()) {
+            if (countFireGlob > countFireCruiser) {
+                if (GetTheBestGun().getNumberOfCharge() > 0) {
+                    cruiser.decreaseLife(GetTheBestGun().getGun().getDamage());
+                    GetTheBestGun().decreaseNumberOfCharge();
+                }
+                countFireGlob++;
+                countFireCruiser = countFireGlob;
+            }
         }
     }
 

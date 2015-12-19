@@ -7,4 +7,5 @@ interface Cruiser {
     void attack(Cruiser cruiser);
 
     void decreaseLife(int damage);
+
 }

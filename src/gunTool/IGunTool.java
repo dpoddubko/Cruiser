@@ -5,7 +5,7 @@ import gun.Gun;
 public interface IGunTool {
     Gun getGun();
 
-    int getCount();
+    int getNumberOfCharge();
 
-    void decreaseCount();
+    void decreaseNumberOfCharge();
 }
