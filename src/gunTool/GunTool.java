@@ -11,6 +11,10 @@ public class GunTool implements IGunTool {
         this.gun = gun;
     }
 
+    public boolean hasCharge() {
+        return numberOfCharge > 0;
+    }
+
     public Gun getGun() {
         return gun;
     }
@@ -20,7 +24,7 @@ public class GunTool implements IGunTool {
     }
 
     public void decreaseNumberOfCharge() {
-        if (numberOfCharge>0)
-        --numberOfCharge;
+        if (numberOfCharge > 0)
+            --numberOfCharge;
     }
 }

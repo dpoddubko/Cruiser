@@ -10,9 +10,6 @@ public abstract class BaseCruiser implements Cruiser {
     private final String name;
     private final List<GunTool> weaponsList;
 
-    private static int countFireGlob = 1;
-
-    private int countFireCruiser = 0;
     private int lifes;
 
     public BaseCruiser(int speed, int initialLife, String name, List<GunTool> weaponsList) {
@@ -42,31 +39,25 @@ public abstract class BaseCruiser implements Cruiser {
         lifes -= damage;
     }
 
-    public GunTool GetTheBestGun() {
+    public GunTool getBestGun() {
         GunTool defoltGun = weaponsList.get(0);
-        GunTool TheBestGun = null;
+        GunTool bestGun = null;
         int defoltDamage = 0;
         for (GunTool w : weaponsList) {
-            if (w.getNumberOfCharge() > 0 && w.getGun().getDamage() > defoltDamage) {
+            if (w.hasCharge() && w.getGun().getDamage() > defoltDamage) {
                 defoltDamage = w.getGun().getDamage();
-                TheBestGun = w;
+                bestGun = w;
             } else {
-                TheBestGun = defoltGun;
+                bestGun = defoltGun;
             }
         }
-        return TheBestGun;
+        return bestGun;
     }
 
     public void attack(Cruiser cruiser) {
-        if (alive()) {
-            if (countFireGlob > countFireCruiser) {
-                if (GetTheBestGun().getNumberOfCharge() > 0) {
-                    cruiser.decreaseLife(GetTheBestGun().getGun().getDamage());
-                    GetTheBestGun().decreaseNumberOfCharge();
-                }
-                countFireGlob++;
-                countFireCruiser = countFireGlob;
-            }
+        if (alive() && getBestGun().hasCharge()) {
+            cruiser.decreaseLife(getBestGun().getGun().getDamage());
+            getBestGun().decreaseNumberOfCharge();
         }
     }
 
