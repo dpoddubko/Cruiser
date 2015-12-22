@@ -4,11 +4,11 @@ import gun.BombGun;
 import gun.MachineGun;
 import gun.MissileSystem;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class WeaponBuilder {
-    private List<GunTool> weapon = new ArrayList<GunTool>();
+    private Set<GunTool> weapon = new TreeSet<GunTool>();
 
     public WeaponBuilder loadMissle(int numOfCharge) {
         weapon.add(new GunTool(numOfCharge, new MissileSystem()));
@@ -25,7 +25,7 @@ public class WeaponBuilder {
         return this;
     }
 
-    public List<GunTool> build() {
+    public Set<GunTool> build() {
         return weapon;
     }
 }
