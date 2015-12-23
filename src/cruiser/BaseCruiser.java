@@ -39,6 +39,7 @@ public abstract class BaseCruiser implements Cruiser {
         lifes -= damage;
     }
 
+   /*
     public GunTool getBestGun() {
         GunTool defoltGun = weaponsList.get(0);
         GunTool bestGun = null;
@@ -60,7 +61,7 @@ public abstract class BaseCruiser implements Cruiser {
             getBestGun().decreaseNumberOfCharge();
         }
     }
-
+*/
     public void display() {
         log(name + ": ");
         log("Скорость движения: " + speed + " узлов.");
