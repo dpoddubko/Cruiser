@@ -2,17 +2,18 @@ package cruiser;
 
 import gunTool.GunTool;
 
+import java.util.List;
 import java.util.Set;
 
 public abstract class BaseCruiser implements Cruiser {
     private final int speed;
     private final int initialLife;
     private final String name;
-    private final Set<GunTool> weaponsList;
+    private final List<GunTool> weaponsList;
 
     private int lifes;
 
-    public BaseCruiser(int speed, int initialLife, String name, Set<GunTool> weaponsList) {
+    public BaseCruiser(int speed, int initialLife, String name, List<GunTool> weaponsList) {
         this.speed = speed;
         this.initialLife = initialLife;
         this.lifes = initialLife;
@@ -39,7 +40,7 @@ public abstract class BaseCruiser implements Cruiser {
         lifes -= damage;
     }
 
-   /*
+
     public GunTool getBestGun() {
         GunTool defoltGun = weaponsList.get(0);
         GunTool bestGun = null;
@@ -61,7 +62,7 @@ public abstract class BaseCruiser implements Cruiser {
             getBestGun().decreaseNumberOfCharge();
         }
     }
-*/
+
     public void display() {
         log(name + ": ");
         log("Скорость движения: " + speed + " узлов.");
