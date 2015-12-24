@@ -13,12 +13,11 @@ public class ComparatorTest {
     public static void main(String[] args) {
         int result;
 
-
         BaseGun machineGun = new MachineGun();
         BaseGun missileSystem = new MissileSystem();
         BaseGun bombGun = new BombGun();
 
-        System.out.println("Использую Set");
+        log("Использую Set");
         Set<BaseGun> set = new TreeSet<BaseGun>();
 
         set.add(missileSystem);
@@ -26,34 +25,36 @@ public class ComparatorTest {
         set.add(bombGun);
 
         for (BaseGun s : set) {
-            System.out.println("Gun name: " + s.getNameOfGun() + ". Damage : " + s.getDamage());
+            log("Gun name: " + s.getNameOfGun() + ". Damage : " + s.getDamage());
         }
-        System.out.println("");
+        log("");
 
-        System.out.println("Использую List");
+        log("Использую List");
+        log("");
         List<BaseGun> list = new ArrayList<BaseGun>();
-
         list.add(missileSystem);
         list.add(machineGun);
         list.add(bombGun);
+
+        log("Исходный несортированный List");
         for (BaseGun l : list) {
-            System.out.println("Gun name: " + l.getNameOfGun() + ". Damage : " + l.getDamage());
+            log("Gun name: " + l.getNameOfGun() + ". Damage : " + l.getDamage());
         }
-        System.out.println("");
-        System.out.println("Сортированный List по damage");
+        log("");
+        log("Сортированный List по damage");
 
         Collections.sort(list);
         for (BaseGun l : list) {
-            System.out.println("Gun name: " + l.getNameOfGun() + ". Damage : " + l.getDamage());
+            log("Gun name: " + l.getNameOfGun() + ". Damage : " + l.getDamage());
         }
-        System.out.println("");
+        log("");
 
-        System.out.println("Сортированный List по distanse");
+        log("Сортированный List по distanse");
         Collections.sort(list, new DistansComporator());
         for (BaseGun l : list) {
-            System.out.println("Gun name: " + l.getNameOfGun() + ". Distanse : " + l.getDistanceOfFire());
+            log("Gun name: " + l.getNameOfGun() + ". Distanse : " + l.getDistanceOfFire());
         }
-
+        log("");
         result = machineGun.compareTo(missileSystem);
         if (result > 0)
             log("machineGun менее мощное оружие, чем missileSystem");
