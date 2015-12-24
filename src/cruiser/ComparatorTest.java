@@ -1,4 +1,5 @@
 package cruiser;
+
 import java.util.*;
 
 import gun.BaseGun;
@@ -16,7 +17,6 @@ public class ComparatorTest {
         BaseGun machineGun = new MachineGun();
         BaseGun missileSystem = new MissileSystem();
         BaseGun bombGun = new BombGun();
-        BaseGun bombGun2 = new BombGun();
 
         System.out.println("Использую Set");
         Set<BaseGun> set = new TreeSet<BaseGun>();
@@ -25,7 +25,7 @@ public class ComparatorTest {
         set.add(machineGun);
         set.add(bombGun);
 
-        for(BaseGun s : set) {
+        for (BaseGun s : set) {
             System.out.println("Gun name: " + s.getNameOfGun() + ". Damage : " + s.getDamage());
         }
         System.out.println("");
@@ -36,10 +36,23 @@ public class ComparatorTest {
         list.add(missileSystem);
         list.add(machineGun);
         list.add(bombGun);
-        for(BaseGun l : list) {
+        for (BaseGun l : list) {
             System.out.println("Gun name: " + l.getNameOfGun() + ". Damage : " + l.getDamage());
         }
         System.out.println("");
+        System.out.println("Сортированный List по damage");
+
+        Collections.sort(list);
+        for (BaseGun l : list) {
+            System.out.println("Gun name: " + l.getNameOfGun() + ". Damage : " + l.getDamage());
+        }
+        System.out.println("");
+
+        System.out.println("Сортированный List по distanse");
+        Collections.sort(list, new DistansComporator());
+        for (BaseGun l : list) {
+            System.out.println("Gun name: " + l.getNameOfGun() + ". Distanse : " + l.getDistanceOfFire());
+        }
 
         result = machineGun.compareTo(missileSystem);
         if (result > 0)
@@ -63,5 +76,19 @@ public class ComparatorTest {
         System.out.println(s);
     }
 
-   // public static <BaseGun<? super BaseGun>> void sort(List<BaseGun> list)
+    private static class DistansComporator implements Comparator<BaseGun> {
+
+
+        @Override
+        public int compare(BaseGun o1, BaseGun o2) {
+            BaseGun gun1 = o1;
+            BaseGun gun2 = o2;
+
+            int result = o2.getDistanceOfFire() - o1.getDistanceOfFire();
+            if (result != 0) {
+                return (int) result / Math.abs(result);
+            }
+            return 0;
+        }
+    }
 }
