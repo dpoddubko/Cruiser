@@ -27,10 +27,14 @@ public abstract class BaseGun implements Gun, Comparable {
     public int compareTo(Object obj) {
         BaseGun entry = (BaseGun) obj;
 
-        int result = entry.damage-damage;
+        int result = entry.damage - damage;
         if (result != 0) {
             return (int) result / Math.abs(result);
         }
         return 0;
+    }
+
+    public String toString() {
+        return "Имя оружия: " + nameOfGun + ". Урон, наносимый оружием: " + damage + ". Радиус порожения:" + distanceOfFire + ".";
     }
 }

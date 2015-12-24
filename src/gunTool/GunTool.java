@@ -2,6 +2,8 @@ package gunTool;
 
 import gun.*;
 
+import java.util.Comparator;
+
 public class GunTool implements IGunTool {
     private int numberOfCharge;
     private Gun gun;
