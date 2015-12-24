@@ -58,7 +58,7 @@ public class ComparatorTest {
         log("");
     }
 
-    private static class DistansComporator implements Comparator<BaseGun> {
+    public static class DistansComporator implements Comparator<BaseGun> {
         @Override
         public int compare(BaseGun o1, BaseGun o2) {
             BaseGun gun1 = o1;
