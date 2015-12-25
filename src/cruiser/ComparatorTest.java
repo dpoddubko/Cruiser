@@ -17,7 +17,7 @@ public class ComparatorTest {
         BaseGun bombGun = new BombGun();
 
         log("Использую Set");
-        log("Список упорядоченный по damage");
+        log("Сортированный Set по damage");
         Set<BaseGun> set = new TreeSet<BaseGun>();
         set.add(missileSystem);
         set.add(machineGun);
