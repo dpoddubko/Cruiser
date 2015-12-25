@@ -25,23 +25,24 @@ public class ComparatorTest {
 
         displaySet(set);
 
-        log("Использую List");
+        log("Использую ArrayList");
         log("");
         List<BaseGun> list = new ArrayList<BaseGun>();
         list.add(missileSystem);
         list.add(machineGun);
         list.add(bombGun);
 
-        log("Исходный несортированный List");
+        log("Исходный несортированный ArrayList");
         displayList(list);
-        log("Сортированный List по damage");
+        log("Сортированный ArrayList по damage");
 
         Collections.sort(list);
         displayList(list);
 
-        log("Сортированный List по distanse");
+        log("Сортированный ArrayList по distanse");
         Collections.sort(list, new DistansComporator());
         displayList(list);
+        log("");
     }
 
     private static void log(String s) {
