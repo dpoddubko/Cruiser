@@ -30,7 +30,7 @@ public class GunTool implements IGunTool, Comparable<GunTool> {
 
     @Override
     public int compareTo(GunTool obj) {
-        if (numberOfCharge <= 0) return 0;
+        if (numberOfCharge == 0) return 0;
         return gun.compareTo(obj.getGun());
     }
 
