@@ -2,23 +2,22 @@ package cruiser;
 
 import gunTool.GunTool;
 
-import java.util.List;
-import java.util.Set;
+import java.util.TreeSet;
 
 public abstract class BaseCruiser implements Cruiser {
     private final int speed;
     private final int initialLife;
     private final String name;
-    private final List<GunTool> weaponsList;
+    private final TreeSet<GunTool> weaponsSet;
 
     private int lifes;
 
-    public BaseCruiser(int speed, int initialLife, String name, List<GunTool> weaponsList) {
+    public BaseCruiser(int speed, int initialLife, String name, TreeSet<GunTool> weaponsSet) {
         this.speed = speed;
         this.initialLife = initialLife;
         this.lifes = initialLife;
         this.name = name;
-        this.weaponsList = weaponsList;
+        this.weaponsSet = weaponsSet;
     }
 
     public void log(String msg) {
@@ -42,17 +41,10 @@ public abstract class BaseCruiser implements Cruiser {
 
 
     public GunTool getBestGun() {
-        GunTool defoltGun = weaponsList.get(0);
-        GunTool bestGun = null;
-        int defoltDamage = 0;
-        for (GunTool w : weaponsList) {
-            if (w.hasCharge() && w.getGun().getDamage() > defoltDamage) {
-                defoltDamage = w.getGun().getDamage();
-                bestGun = w;
-            } else {
-                bestGun = defoltGun;
-            }
+        if (weaponsSet.first().getNumberOfCharge() <= 0) {
+            weaponsSet.pollFirst();
         }
+        GunTool bestGun = weaponsSet.first();
         return bestGun;
     }
 

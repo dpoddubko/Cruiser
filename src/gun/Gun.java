@@ -1,9 +1,11 @@
 package gun;
 
 public interface Gun {
-     String getNameOfGun();
+    String getNameOfGun();
 
-     int getDamage();
+    int getDamage();
 
-     int getDistanceOfFire();
+    int getDistanceOfFire();
+
+    int compareTo(Object obj);
 }

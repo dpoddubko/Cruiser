@@ -8,6 +8,7 @@ public class ProtectedCruiser extends BaseCruiser {
         super(20, 100, "Бронепалубный Крейсер", new WeaponBuilder().
                 loadBomb(10).
                 loadMashineGun(200).
+                loadMissle(25).
                 build());
     }
 }

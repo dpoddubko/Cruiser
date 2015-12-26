@@ -1,9 +1,6 @@
 package cruiser;
 
-import gunTool.GunTool;
 import gunTool.WeaponBuilder;
-
-import java.util.List;
 
 public class CruiserHelicopterCarriers extends BaseCruiser {
 

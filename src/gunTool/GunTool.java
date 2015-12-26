@@ -1,10 +1,8 @@
 package gunTool;
 
-import gun.*;
+import gun.Gun;
 
-import java.util.Comparator;
-
-public class GunTool implements IGunTool {
+public class GunTool implements IGunTool, Comparable<GunTool> {
     private int numberOfCharge;
     private Gun gun;
 
@@ -28,5 +26,15 @@ public class GunTool implements IGunTool {
     public void decreaseNumberOfCharge() {
         if (numberOfCharge > 0)
             --numberOfCharge;
+    }
+
+    @Override
+    public int compareTo(GunTool obj) {
+        if (numberOfCharge <= 0) return 0;
+        return gun.compareTo(obj.getGun());
+    }
+
+    public String toString() {
+        return "Количество патронов: " + numberOfCharge + ". " + gun.toString();
     }
 }

@@ -35,6 +35,16 @@ public abstract class BaseGun implements Gun, Comparable {
     }
 
     public String toString() {
-        return "Имя оружия: " + nameOfGun + ". Урон, наносимый оружием: " + damage + ". Радиус порожения:" + distanceOfFire + ".";
+        return "Имя оружия: " + nameOfGun + ". Урон, наносимый оружием: " + damage + ". Радиус поражения: " + distanceOfFire + ".";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseGun baseGun = (BaseGun) o;
+        if (damage != baseGun.damage) return false;
+        if (distanceOfFire != baseGun.distanceOfFire) return false;
+        return !(nameOfGun != null ? !nameOfGun.equals(baseGun.nameOfGun) : baseGun.nameOfGun != null);
     }
 }

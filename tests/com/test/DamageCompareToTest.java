@@ -1,4 +1,4 @@
-package cruiser;
+package com.test;
 
 import static org.junit.Assert.assertEquals;
 
