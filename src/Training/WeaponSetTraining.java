@@ -14,12 +14,12 @@ public class WeaponSetTraining {
         TreeSet<GunTool> weaponSet = new TreeSet<GunTool>();
         weaponSet.add(new GunTool(30, new MissileSystem()));
         weaponSet.add(new GunTool(50, new MachineGun()));
-        //weaponSet.add(new GunTool(0, new BombGun()));
+        weaponSet.add(new GunTool(10, new BombGun()));
         weaponSet.add(new GunTool(60, new BombGun()));
 
         displaySet(weaponSet);
         log("" + weaponSet.size());
-        log(""+weaponSet.first());
+        log("" + weaponSet.first());
     }
 
     public static void displaySet(Set<GunTool> weapon) {

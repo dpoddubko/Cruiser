@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 public class WeaponsSetTest {
     @Test
-    public void weaponsSetTest() {
+    public void weaponsSetFalseTest() {
         MissileCruiser missileCruiser = new MissileCruiser();
         ProtectedCruiser protectedCruiser = new ProtectedCruiser();
 

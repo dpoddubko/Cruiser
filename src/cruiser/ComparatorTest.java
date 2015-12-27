@@ -14,14 +14,22 @@ public class ComparatorTest {
 
         BaseGun machineGun = new MachineGun();
         BaseGun missileSystem = new MissileSystem();
-        BaseGun bombGun = new BombGun();
+        BaseGun bombGun1 = new BombGun();
+        BaseGun bombGun2 = new BombGun();
 
         log("Использую Set");
         log("Сортированный Set по damage");
+        log("");
         Set<BaseGun> set = new TreeSet<BaseGun>();
         set.add(missileSystem);
         set.add(machineGun);
-        set.add(bombGun);
+        set.add(bombGun1);
+        set.add(bombGun2);
+        log("bombGun1.equals(bombGun2): " + bombGun1.equals(bombGun2));
+        log("bombGun1.equals(bombGun1): " + bombGun1.equals(bombGun1));
+        log("bombGun1.compareTo(bombGun2): "+bombGun1.compareTo(bombGun2));
+        //log(""+bombGun1.toString());
+        //log(""+bombGun2.toString());
 
         displaySet(set);
 
@@ -30,7 +38,7 @@ public class ComparatorTest {
         List<BaseGun> list = new ArrayList<BaseGun>();
         list.add(missileSystem);
         list.add(machineGun);
-        list.add(bombGun);
+        list.add(bombGun1);
 
         log("Исходный несортированный ArrayList");
         displayList(list);
@@ -43,6 +51,7 @@ public class ComparatorTest {
         Collections.sort(list, new DistansComporator());
         displayList(list);
         log("");
+
     }
 
     private static void log(String s) {

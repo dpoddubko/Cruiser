@@ -41,7 +41,7 @@ public abstract class BaseCruiser implements Cruiser {
 
 
     public GunTool getBestGun() {
-        if (weaponsSet.first().getNumberOfCharge() <= 0) {
+        if (weaponsSet.first().getNumberOfCharge() == 0) {
             weaponsSet.pollFirst();
         }
         GunTool bestGun = weaponsSet.first();
