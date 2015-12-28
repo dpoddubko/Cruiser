@@ -7,25 +7,25 @@ import gun.MissileSystem;
 import java.util.TreeSet;
 
 public class WeaponBuilder {
-    private TreeSet<GunTool> weapon = new TreeSet<GunTool>();
+    private TreeSet<GunTool> weaponSet = new TreeSet<GunTool>();
 
     public WeaponBuilder loadMissle(int numOfCharge) {
-        weapon.add(new GunTool(numOfCharge, new MissileSystem()));
+        weaponSet.add(new GunTool(numOfCharge, new MissileSystem()));
         return this;
     }
 
     public WeaponBuilder loadBomb(int numOfCharge) {
-        weapon.add(new GunTool(numOfCharge, new BombGun()));
+        weaponSet.add(new GunTool(numOfCharge, new BombGun()));
         return this;
     }
 
     public WeaponBuilder loadMashineGun(int numOfCharge) {
-        weapon.add(new GunTool(numOfCharge, new MachineGun()));
+        weaponSet.add(new GunTool(numOfCharge, new MachineGun()));
         return this;
     }
 
     public TreeSet<GunTool> build() {
-        return weapon;
+        return weaponSet;
     }
 
 }

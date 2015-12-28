@@ -8,7 +8,14 @@ public abstract class BaseCruiser implements Cruiser {
     private final int speed;
     private final int initialLife;
     private final String name;
-    private final TreeSet<GunTool> weaponsSet;
+
+    public void setWeaponsSet(TreeSet<GunTool> weaponsSet) {
+        this.weaponsSet = weaponsSet;
+    }
+    public TreeSet<GunTool> getWeaponsSet() {
+        return weaponsSet;
+    }
+    private TreeSet<GunTool> weaponsSet;
 
     private int lifes;
 
@@ -39,12 +46,21 @@ public abstract class BaseCruiser implements Cruiser {
         lifes -= damage;
     }
 
+    public void sortWeaponsSet(TreeSet<GunTool> weaponsSet) {
+        TreeSet<GunTool> sortWeaponsSet = new TreeSet<GunTool>();
+        TreeSet<GunTool> weap = weaponsSet;
+        GunTool arrWeap[] = new GunTool[weap.size()];
+        arrWeap = weap.toArray(arrWeap);
+        for (GunTool w : arrWeap) sortWeaponsSet.add(w);
+        setWeaponsSet(sortWeaponsSet);
+    }
 
     public GunTool getBestGun() {
-        if (weaponsSet.first().getNumberOfCharge() == 0) {
-            weaponsSet.pollFirst();
-        }
         GunTool bestGun = weaponsSet.first();
+        if (bestGun.getNumberOfCharge() == 0) {
+            sortWeaponsSet(weaponsSet);
+            return weaponsSet.first();
+        }
         return bestGun;
     }
 

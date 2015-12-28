@@ -1,12 +1,12 @@
 package com.test;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
 import gun.BaseGun;
 import gun.BombGun;
 import gun.MachineGun;
 import gun.MissileSystem;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class DamageCompareToTest {
 

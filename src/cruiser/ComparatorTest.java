@@ -1,13 +1,11 @@
 package cruiser;
 
-import java.util.*;
-
 import gun.BaseGun;
 import gun.BombGun;
 import gun.MachineGun;
 import gun.MissileSystem;
 
-import java.util.TreeSet;
+import java.util.*;
 
 public class ComparatorTest {
     public static void main(String[] args) {
@@ -27,9 +25,7 @@ public class ComparatorTest {
         set.add(bombGun2);
         log("bombGun1.equals(bombGun2): " + bombGun1.equals(bombGun2));
         log("bombGun1.equals(bombGun1): " + bombGun1.equals(bombGun1));
-        log("bombGun1.compareTo(bombGun2): "+bombGun1.compareTo(bombGun2));
-        //log(""+bombGun1.toString());
-        //log(""+bombGun2.toString());
+        log("bombGun1.compareTo(bombGun2): " + bombGun1.compareTo(bombGun2));
 
         displaySet(set);
 
