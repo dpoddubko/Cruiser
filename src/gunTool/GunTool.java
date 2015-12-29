@@ -30,36 +30,17 @@ public class GunTool implements IGunTool, Comparable<GunTool> {
 
     @Override
     public int compareTo(GunTool obj) {
-        int result = gun.compareTo(obj.getGun());//0, 1, -1
-
-        if (result == 1 && obj.getNumberOfCharge() == 0 && getNumberOfCharge() == 0) return 1;
-        if (result == 1 && obj.getNumberOfCharge() == 0 && getNumberOfCharge() > 0) return -1;
-        if (result == 1 && obj.getNumberOfCharge() > 0 && getNumberOfCharge() == 0) return 1;
-        if (result == 1 && obj.getNumberOfCharge() > 0 && getNumberOfCharge() > 0) return 1;
-
-        if (result == 0 && obj.getNumberOfCharge() == getNumberOfCharge()) return 0;
-        if (result == 0 && obj.getNumberOfCharge() == 0 && getNumberOfCharge() == 0) return 0;
-        if (result == 0 && obj.getNumberOfCharge() == 0 && getNumberOfCharge() > 0) return -1;
-        if (result == 0 && obj.getNumberOfCharge() > 0 && getNumberOfCharge() == 0) return 1;
-
-        if (result == 0 && obj.getNumberOfCharge() > 0 && getNumberOfCharge() > 0 && obj.getNumberOfCharge() > getNumberOfCharge())
-            return 1;
-        if (result == 0 && obj.getNumberOfCharge() > 0 && getNumberOfCharge() > 0 && obj.getNumberOfCharge() < getNumberOfCharge())
+        if (obj.getNumberOfCharge() == 0 ^ getNumberOfCharge() == 0) {
+            if (obj.getNumberOfCharge() != 0) return 1;
             return -1;
-
-        if (result == -1 && obj.getNumberOfCharge() == 0 && getNumberOfCharge() == 0) return -1;
-        if (result == -1 && obj.getNumberOfCharge() == 0 && getNumberOfCharge() > 0) return -1;
-        if (result == -1 && obj.getNumberOfCharge() > 0 && getNumberOfCharge() == 0) return 1;
-        if (result == -1 && obj.getNumberOfCharge() > 0 && getNumberOfCharge() > 0) return -1;
-
-        return -1;
+        }
+        return gun.compareTo(obj.getGun());
     }
 
     @Override
     public boolean equals(Object o) {
         GunTool obj = (GunTool) o;
-        if (this.compareTo(obj) == 0) return true;
-        return false;
+        return this.compareTo(obj) == 0;
     }
 
     public String toString() {

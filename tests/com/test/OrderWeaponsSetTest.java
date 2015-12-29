@@ -15,29 +15,26 @@ public class OrderWeaponsSetTest {
     public void orderWeaponsSetTest() {
         TreeSet<GunTool> weaponSet = new TreeSet<GunTool>();
 
-        GunTool third = new GunTool(20, new MissileSystem());
-        weaponSet.add(third);
-        GunTool eighth = new GunTool(0, new MissileSystem());
-        weaponSet.add(eighth);
-        GunTool fourth = new GunTool(10, new MissileSystem());
-        weaponSet.add(fourth);
 
-        GunTool sixth = new GunTool(10, new MachineGun());
-        weaponSet.add(sixth);
-        GunTool fifth = new GunTool(20, new MachineGun());
+        GunTool fifth = new GunTool(0, new MissileSystem());
         weaponSet.add(fifth);
-        GunTool ninth = new GunTool(0, new MachineGun());
-        weaponSet.add(ninth);
-
-        GunTool first = new GunTool(20, new BombGun());
-        weaponSet.add(first);
-        GunTool second = new GunTool(10, new BombGun());
+        GunTool second = new GunTool(10, new MissileSystem());
         weaponSet.add(second);
-        GunTool seventh = new GunTool(0, new BombGun());
-        weaponSet.add(seventh);
+
+        GunTool third = new GunTool(200, new MachineGun());
+        weaponSet.add(third);
+        GunTool sixth = new GunTool(0, new MachineGun());
+        weaponSet.add(sixth);
+
+        GunTool first = new GunTool(15, new BombGun());
+        weaponSet.add(first);
+        GunTool fourth = new GunTool(0, new BombGun());
+        weaponSet.add(fourth);
 
         GunTool arrWeap[] = new GunTool[weaponSet.size()];
         arrWeap = weaponSet.toArray(arrWeap);
+        displayArr(arrWeap);
+        displaySet(weaponSet);
 
         assertEquals(first, arrWeap[0]);
         assertEquals(second, arrWeap[1]);
@@ -45,9 +42,6 @@ public class OrderWeaponsSetTest {
         assertEquals(fourth, arrWeap[3]);
         assertEquals(fifth, arrWeap[4]);
         assertEquals(sixth, arrWeap[5]);
-        assertEquals(seventh, arrWeap[6]);
-        assertEquals(eighth, arrWeap[7]);
-        assertEquals(ninth, arrWeap[8]);
 
     }
 

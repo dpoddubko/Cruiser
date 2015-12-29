@@ -12,9 +12,11 @@ public abstract class BaseCruiser implements Cruiser {
     public void setWeaponsSet(TreeSet<GunTool> weaponsSet) {
         this.weaponsSet = weaponsSet;
     }
+
     public TreeSet<GunTool> getWeaponsSet() {
         return weaponsSet;
     }
+
     private TreeSet<GunTool> weaponsSet;
 
     private int lifes;
@@ -38,7 +40,7 @@ public abstract class BaseCruiser implements Cruiser {
         }
     }
 
-    public boolean alive() {
+    public boolean isAlive() {
         return lifes > 0;
     }
 
@@ -47,12 +49,11 @@ public abstract class BaseCruiser implements Cruiser {
     }
 
     public void sortWeaponsSet(TreeSet<GunTool> weaponsSet) {
-        TreeSet<GunTool> sortWeaponsSet = new TreeSet<GunTool>();
-        TreeSet<GunTool> weap = weaponsSet;
-        GunTool arrWeap[] = new GunTool[weap.size()];
-        arrWeap = weap.toArray(arrWeap);
-        for (GunTool w : arrWeap) sortWeaponsSet.add(w);
-        setWeaponsSet(sortWeaponsSet);
+        TreeSet<GunTool> newWeaponSet = new TreeSet<GunTool>();
+        GunTool arrWeap[] = new GunTool[weaponsSet.size()];
+        arrWeap = weaponsSet.toArray(arrWeap);
+        for (GunTool w : arrWeap) newWeaponSet.add(w);
+        setWeaponsSet(newWeaponSet);
     }
 
     public GunTool getBestGun() {
@@ -65,7 +66,7 @@ public abstract class BaseCruiser implements Cruiser {
     }
 
     public void attack(Cruiser cruiser) {
-        if (alive() && getBestGun().hasCharge()) {
+        if (isAlive() && getBestGun().hasCharge()) {
             cruiser.decreaseLife(getBestGun().getGun().getDamage());
             getBestGun().decreaseNumberOfCharge();
         }
