@@ -8,13 +8,13 @@ import gun.MissileSystem;
 import gunTool.GunTool;
 import org.junit.Test;
 
-import java.util.TreeSet;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class AttackWeaponsSetTest {
+public class AttackWeaponsListTest {
     @Test
-    public void weaponsSetTest() {
+    public void weaponsListTest() {
         MissileCruiser missileCruiser = new MissileCruiser();
         ProtectedCruiser protectedCruiser = new ProtectedCruiser();
 
@@ -29,14 +29,15 @@ public class AttackWeaponsSetTest {
         missileCruiser.display();
         for (int i = 0; i < numberOfChargeProtectedCr + 1; i++)
             protectedCruiser.attack(missileCruiser);
-        displayWeaponSet(protectedCruiser.getWeaponsSet());
+        displayWeaponList(protectedCruiser.getWeaponsList());
 
         assertEquals(missileSystem, protectedCruiser.getBestGun().getGun());
         assertEquals(24, protectedCruiser.getBestGun().getNumberOfCharge());
+
     }
 
-    public static void displayWeaponSet(TreeSet<GunTool> weaponSet) {
-        for (GunTool w : weaponSet) System.out.println("weaponSet element: " + w);
+    public static void displayWeaponList(List<GunTool> weaponList) {
+        for (GunTool w : weaponList) System.out.println("weaponList element: " + w);
         System.out.println("");
     }
 }

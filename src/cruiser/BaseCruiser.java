@@ -2,31 +2,28 @@ package cruiser;
 
 import gunTool.GunTool;
 
-import java.util.TreeSet;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class BaseCruiser implements Cruiser {
     private final int speed;
     private final int initialLife;
     private final String name;
 
-    public void setWeaponsSet(TreeSet<GunTool> weaponsSet) {
-        this.weaponsSet = weaponsSet;
+    public List<GunTool> getWeaponsList() {
+        return weaponsList;
     }
 
-    public TreeSet<GunTool> getWeaponsSet() {
-        return weaponsSet;
-    }
-
-    private TreeSet<GunTool> weaponsSet;
+    private List<GunTool> weaponsList;
 
     private int lifes;
 
-    public BaseCruiser(int speed, int initialLife, String name, TreeSet<GunTool> weaponsSet) {
+    public BaseCruiser(int speed, int initialLife, String name, List<GunTool> weaponsList) {
         this.speed = speed;
         this.initialLife = initialLife;
         this.lifes = initialLife;
         this.name = name;
-        this.weaponsSet = weaponsSet;
+        this.weaponsList = weaponsList;
     }
 
     public void log(String msg) {
@@ -48,19 +45,11 @@ public abstract class BaseCruiser implements Cruiser {
         lifes -= damage;
     }
 
-    public void sortWeaponsSet(TreeSet<GunTool> weaponsSet) {
-        TreeSet<GunTool> newWeaponSet = new TreeSet<GunTool>();
-        GunTool arrWeap[] = new GunTool[weaponsSet.size()];
-        arrWeap = weaponsSet.toArray(arrWeap);
-        for (GunTool w : arrWeap) newWeaponSet.add(w);
-        setWeaponsSet(newWeaponSet);
-    }
-
     public GunTool getBestGun() {
-        GunTool bestGun = weaponsSet.first();
+        GunTool bestGun = weaponsList.get(0);
         if (bestGun.getNumberOfCharge() == 0) {
-            sortWeaponsSet(weaponsSet);
-            return weaponsSet.first();
+            Collections.sort(weaponsList);
+            return weaponsList.get(0);
         }
         return bestGun;
     }
