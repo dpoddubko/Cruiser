@@ -35,7 +35,7 @@ public abstract class BaseGun implements Gun, Comparable {
     }
 
     public String toString() {
-        return "Имя оружия: " + nameOfGun + ". Урон, наносимый оружием: " + damage + ". Радиус поражения: " + distanceOfFire + ".";
+        return "Имя оружия: " + nameOfGun + ". Урон, наносимый оружием: " + damage + ". Радиус поражения: " + distanceOfFire + "."+ "\n";
     }
 
     @Override

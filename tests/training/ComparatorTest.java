@@ -1,4 +1,4 @@
-package cruiser;
+package training;
 
 import gun.BaseGun;
 import gun.BombGun;
@@ -10,6 +10,7 @@ import java.util.*;
 
 public class ComparatorTest {
     final static Logger log = Logger.getLogger(ComparatorTest.class);
+
     public static void main(String[] args) {
 
         BaseGun machineGun = new MachineGun();
@@ -19,7 +20,7 @@ public class ComparatorTest {
 
         log.info("Использую Set");
         log.info("Сортированный Set по damage");
-        System.out.println("");
+        log.info("");
         Set<BaseGun> set = new TreeSet<BaseGun>();
         set.add(missileSystem);
         set.add(machineGun);
@@ -29,37 +30,27 @@ public class ComparatorTest {
         log.info("bombGun1.equals(bombGun1): " + bombGun1.equals(bombGun1));
         log.info("bombGun1.compareTo(bombGun2): " + bombGun1.compareTo(bombGun2));
 
-        displaySet(set);
+        log.info("\n" + set);
 
         log.info("Использую ArrayList");
-        System.out.println("");
+        log.info("");
         List<BaseGun> list = new ArrayList<BaseGun>();
         list.add(missileSystem);
         list.add(machineGun);
         list.add(bombGun1);
 
         log.info("Исходный несортированный ArrayList");
-        displayList(list);
+        log.info("\n" + list);
         log.info("Сортированный ArrayList по damage");
 
         Collections.sort(list);
-        displayList(list);
+        log.info("\n" + list);
+        log.info("\n" + list);
 
         log.info("Сортированный ArrayList по distanse");
         Collections.sort(list, new DistansComporator());
-        displayList(list);
-        System.out.println("");
-
-    }
-
-    public static void displayList(List<BaseGun> list) {
-        for (BaseGun l : list) System.out.println(l);
-        System.out.println("");
-    }
-
-    public static void displaySet(Set<BaseGun> set) {
-        for (BaseGun s : set) System.out.println(s);
-        System.out.println("");
+        log.info("\n" + list);
+        log.info("");
     }
 
     public static class DistansComporator implements Comparator<BaseGun> {

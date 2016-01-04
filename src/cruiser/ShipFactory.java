@@ -1,9 +1,12 @@
 package cruiser;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShipFactory {
+    final static Logger log = Logger.getLogger(ShipFactory.class);
     private List<MissileCruiser> listMissileCr = new ArrayList<MissileCruiser>();
     private List<ProtectedCruiser> listProtectCr = new ArrayList<ProtectedCruiser>();
     private List<CruiserHelicopterCarriers> listHelicopterCr = new ArrayList<CruiserHelicopterCarriers>();
@@ -33,18 +36,15 @@ public class ShipFactory {
     }
 
     public void displayMissileCruisers() {
-        for (MissileCruiser lm : listMissileCr)
-            lm.display();
+        log.info("\n" + listMissileCr);
     }
 
     public void displayProtectedCruisers() {
-        for (ProtectedCruiser lp : listProtectCr)
-            lp.display();
+        log.info("\n" + listProtectCr);
     }
 
     public void displaylistHelicopterCrs() {
-        for (CruiserHelicopterCarriers lh : listHelicopterCr)
-            lh.display();
+        log.info("\n" + listHelicopterCr);
     }
 
     public void displayAll() {

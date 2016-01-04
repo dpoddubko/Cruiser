@@ -39,8 +39,8 @@ public class OrderWeaponsTest {
 
         GunTool arrWeap[] = new GunTool[weaponSet.size()];
         arrWeap = weaponSet.toArray(arrWeap);
-        displayArr(arrWeap);
-        displaySet(weaponSet);
+        log.info(arrWeap);
+        log.info(weaponSet);
 
         assertEquals(first, arrWeap[0]);
         assertEquals(second, arrWeap[1]);
@@ -77,7 +77,7 @@ public class OrderWeaponsTest {
 
         Collections.sort(weaponList);
 
-        displayList(weaponList);
+        log.info("\n" + weaponList);
 
         assertEquals(first, weaponList.get(0));
         assertEquals(second, weaponList.get(1));
@@ -90,20 +90,4 @@ public class OrderWeaponsTest {
         assertEquals(ninth, weaponList.get(8));
 
     }
-
-    public static void displaySet(TreeSet<GunTool> weaponSet) {
-        for (GunTool w : weaponSet) log.info("weaponSet element: " + w);
-        System.out.println("");
-    }
-
-    public static void displayArr(GunTool arrWeap[]) {
-        for (GunTool wep : arrWeap) log.info("GunTool element: " + wep);
-        System.out.println("");
-    }
-
-    public static void displayList(List<GunTool> list) {
-        for (GunTool l : list) log.info(l);
-        System.out.println("");
-    }
-
 }

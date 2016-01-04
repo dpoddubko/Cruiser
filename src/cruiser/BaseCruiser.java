@@ -28,7 +28,7 @@ public abstract class BaseCruiser implements Cruiser {
         this.weaponsList = weaponsList;
     }
 
-        public void goForward() {
+    public void goForward() {
         if (lifes > (initialLife / 3)) {
             log.info("Скорость передвижения крейсера: " +
                     speed + " узлов.");
@@ -55,13 +55,7 @@ public abstract class BaseCruiser implements Cruiser {
         }
     }
 
-    public void display() {
-        if(log.isInfoEnabled()){
-            log.info(name + ": ");
-            log.info("Скорость движения: " + speed + " узлов.");
-            log.info("Начальное количество жизней: " + initialLife + ".");
-            log.info("Оставшееся количество жизней: " + lifes + ".");
-            log.info("");
-        }
+    public String toString() {
+        return "Название корабля: " + name + ". Скорость движения: " + speed + " узлов" + ". Начальное количество жизней: " + initialLife + ". Оставшееся количество жизней: " + lifes + ". \n";
     }
 }

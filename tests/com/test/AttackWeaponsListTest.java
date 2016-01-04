@@ -6,6 +6,7 @@ import gun.BombGun;
 import gun.Gun;
 import gun.MissileSystem;
 import gunTool.GunTool;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class AttackWeaponsListTest {
+    final static Logger log = Logger.getLogger(AttackWeaponsListTest.class);
+
     @Test
     public void weaponsListTest() {
         MissileCruiser missileCruiser = new MissileCruiser();
@@ -26,18 +29,13 @@ public class AttackWeaponsListTest {
         assertEquals(bombGun, bestGunOfProtectedCr);
         assertEquals(10, protectedCruiser.getBestGun().getNumberOfCharge());
 
-        missileCruiser.display();
+        log.info("\n" + missileCruiser);
         for (int i = 0; i < numberOfChargeProtectedCr + 1; i++)
             protectedCruiser.attack(missileCruiser);
-        displayWeaponList(protectedCruiser.getWeaponsList());
+        log.info("\n" + protectedCruiser.getWeaponsList());
 
         assertEquals(missileSystem, protectedCruiser.getBestGun().getGun());
         assertEquals(24, protectedCruiser.getBestGun().getNumberOfCharge());
 
-    }
-
-    public static void displayWeaponList(List<GunTool> weaponList) {
-        for (GunTool w : weaponList) System.out.println("weaponList element: " + w);
-        System.out.println("");
     }
 }
