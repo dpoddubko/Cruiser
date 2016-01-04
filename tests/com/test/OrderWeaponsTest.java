@@ -4,6 +4,7 @@ import gun.BombGun;
 import gun.MachineGun;
 import gun.MissileSystem;
 import gunTool.GunTool;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import java.util.TreeSet;
 import static junit.framework.Assert.assertEquals;
 
 public class OrderWeaponsTest {
+    final static Logger log = Logger.getLogger(OrderWeaponsTest.class);
+
     @Test
     public void orderWeaponsSetTest() {
         TreeSet<GunTool> weaponSet = new TreeSet<GunTool>();
@@ -89,21 +92,18 @@ public class OrderWeaponsTest {
     }
 
     public static void displaySet(TreeSet<GunTool> weaponSet) {
-        for (GunTool w : weaponSet) log("weaponSet element: " + w);
-        log("");
+        for (GunTool w : weaponSet) log.info("weaponSet element: " + w);
+        System.out.println("");
     }
 
     public static void displayArr(GunTool arrWeap[]) {
-        for (GunTool wep : arrWeap) log("GunTool element: " + wep);
-        log("");
+        for (GunTool wep : arrWeap) log.info("GunTool element: " + wep);
+        System.out.println("");
     }
 
     public static void displayList(List<GunTool> list) {
-        for (GunTool l : list) System.out.println(l);
-        log("");
+        for (GunTool l : list) log.info(l);
+        System.out.println("");
     }
 
-    private static void log(String s) {
-        System.out.println(s);
-    }
 }

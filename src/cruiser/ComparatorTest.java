@@ -4,10 +4,12 @@ import gun.BaseGun;
 import gun.BombGun;
 import gun.MachineGun;
 import gun.MissileSystem;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
 public class ComparatorTest {
+    final static Logger log = Logger.getLogger(ComparatorTest.class);
     public static void main(String[] args) {
 
         BaseGun machineGun = new MachineGun();
@@ -15,53 +17,49 @@ public class ComparatorTest {
         BaseGun bombGun1 = new BombGun();
         BaseGun bombGun2 = new BombGun();
 
-        log("Использую Set");
-        log("Сортированный Set по damage");
-        log("");
+        log.info("Использую Set");
+        log.info("Сортированный Set по damage");
+        System.out.println("");
         Set<BaseGun> set = new TreeSet<BaseGun>();
         set.add(missileSystem);
         set.add(machineGun);
         set.add(bombGun1);
         set.add(bombGun2);
-        log("bombGun1.equals(bombGun2): " + bombGun1.equals(bombGun2));
-        log("bombGun1.equals(bombGun1): " + bombGun1.equals(bombGun1));
-        log("bombGun1.compareTo(bombGun2): " + bombGun1.compareTo(bombGun2));
+        log.info("bombGun1.equals(bombGun2): " + bombGun1.equals(bombGun2));
+        log.info("bombGun1.equals(bombGun1): " + bombGun1.equals(bombGun1));
+        log.info("bombGun1.compareTo(bombGun2): " + bombGun1.compareTo(bombGun2));
 
         displaySet(set);
 
-        log("Использую ArrayList");
-        log("");
+        log.info("Использую ArrayList");
+        System.out.println("");
         List<BaseGun> list = new ArrayList<BaseGun>();
         list.add(missileSystem);
         list.add(machineGun);
         list.add(bombGun1);
 
-        log("Исходный несортированный ArrayList");
+        log.info("Исходный несортированный ArrayList");
         displayList(list);
-        log("Сортированный ArrayList по damage");
+        log.info("Сортированный ArrayList по damage");
 
         Collections.sort(list);
         displayList(list);
 
-        log("Сортированный ArrayList по distanse");
+        log.info("Сортированный ArrayList по distanse");
         Collections.sort(list, new DistansComporator());
         displayList(list);
-        log("");
+        System.out.println("");
 
-    }
-
-    private static void log(String s) {
-        System.out.println(s);
     }
 
     public static void displayList(List<BaseGun> list) {
         for (BaseGun l : list) System.out.println(l);
-        log("");
+        System.out.println("");
     }
 
     public static void displaySet(Set<BaseGun> set) {
         for (BaseGun s : set) System.out.println(s);
-        log("");
+        System.out.println("");
     }
 
     public static class DistansComporator implements Comparator<BaseGun> {

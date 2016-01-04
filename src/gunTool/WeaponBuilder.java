@@ -27,7 +27,6 @@ public class WeaponBuilder {
     }
 
     public List<GunTool> build() {
-        Collections.sort(weaponList);
         return weaponList;
     }
 
