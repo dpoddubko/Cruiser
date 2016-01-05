@@ -9,6 +9,5 @@ public class CruiserApp {
         factory.addProtectedCruisers();
         factory.addProtectedCruisers();
         factory.getListMissileCr().get(0).attack(factory.getListProtectCr().get(0));
-        factory.displayAll();
     }
 }

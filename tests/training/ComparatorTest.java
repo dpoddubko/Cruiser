@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import java.util.*;
 
 public class ComparatorTest {
-    final static Logger log = Logger.getLogger(ComparatorTest.class);
+    final static Logger LOG = Logger.getLogger(ComparatorTest.class);
 
     public static void main(String[] args) {
 
@@ -18,39 +18,39 @@ public class ComparatorTest {
         BaseGun bombGun1 = new BombGun();
         BaseGun bombGun2 = new BombGun();
 
-        log.info("Использую Set");
-        log.info("Сортированный Set по damage");
-        log.info("");
+        LOG.info("Использую Set");
+        LOG.info("Сортированный Set по damage");
+        LOG.info("");
         Set<BaseGun> set = new TreeSet<BaseGun>();
         set.add(missileSystem);
         set.add(machineGun);
         set.add(bombGun1);
         set.add(bombGun2);
-        log.info("bombGun1.equals(bombGun2): " + bombGun1.equals(bombGun2));
-        log.info("bombGun1.equals(bombGun1): " + bombGun1.equals(bombGun1));
-        log.info("bombGun1.compareTo(bombGun2): " + bombGun1.compareTo(bombGun2));
+        LOG.info("bombGun1.equals(bombGun2): " + bombGun1.equals(bombGun2));
+        LOG.info("bombGun1.equals(bombGun1): " + bombGun1.equals(bombGun1));
+        LOG.info("bombGun1.compareTo(bombGun2): " + bombGun1.compareTo(bombGun2));
 
-        log.info("\n" + set);
+        LOG.info("\n" + set);
 
-        log.info("Использую ArrayList");
-        log.info("");
+        LOG.info("Использую ArrayList");
+        LOG.info("");
         List<BaseGun> list = new ArrayList<BaseGun>();
         list.add(missileSystem);
         list.add(machineGun);
         list.add(bombGun1);
 
-        log.info("Исходный несортированный ArrayList");
-        log.info("\n" + list);
-        log.info("Сортированный ArrayList по damage");
+        LOG.info("Исходный несортированный ArrayList");
+        LOG.info("\n" + list);
+        LOG.info("Сортированный ArrayList по damage");
 
         Collections.sort(list);
-        log.info("\n" + list);
-        log.info("\n" + list);
+        LOG.info("\n" + list);
+        LOG.info("\n" + list);
 
-        log.info("Сортированный ArrayList по distanse");
+        LOG.info("Сортированный ArrayList по distanse");
         Collections.sort(list, new DistansComporator());
-        log.info("\n" + list);
-        log.info("");
+        LOG.info("\n" + list);
+        LOG.info("");
     }
 
     public static class DistansComporator implements Comparator<BaseGun> {

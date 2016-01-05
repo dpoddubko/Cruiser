@@ -11,7 +11,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class AttackWeaponsListTest {
-    final static Logger log = Logger.getLogger(AttackWeaponsListTest.class);
+    final static Logger LOG = Logger.getLogger(AttackWeaponsListTest.class);
 
     @Test
     public void weaponsListTest() {
@@ -26,10 +26,10 @@ public class AttackWeaponsListTest {
         assertEquals(bombGun, bestGunOfProtectedCr);
         assertEquals(10, protectedCruiser.getBestGun().getNumberOfCharge());
 
-        log.info("\n" + missileCruiser);
+        LOG.info("\n" + missileCruiser);
         for (int i = 0; i < numberOfChargeProtectedCr + 1; i++)
             protectedCruiser.attack(missileCruiser);
-        log.info("\n" + protectedCruiser.getWeaponsList());
+        LOG.info("\n" + protectedCruiser.getWeaponsList());
 
         assertEquals(missileSystem, protectedCruiser.getBestGun().getGun());
         assertEquals(24, protectedCruiser.getBestGun().getNumberOfCharge());

@@ -10,7 +10,7 @@ public abstract class BaseCruiser implements Cruiser {
     private final int speed;
     private final int initialLife;
     private final String name;
-    final static Logger log = Logger.getLogger(BaseCruiser.class);
+    final static Logger LOG = Logger.getLogger(BaseCruiser.class);
 
     public List<GunTool> getWeaponsList() {
         return weaponsList;
@@ -30,7 +30,7 @@ public abstract class BaseCruiser implements Cruiser {
 
     public void goForward() {
         if (lifes > (initialLife / 3)) {
-            log.info("Скорость передвижения крейсера: " +
+            LOG.info("Скорость передвижения крейсера: " +
                     speed + " узлов.");
         }
     }

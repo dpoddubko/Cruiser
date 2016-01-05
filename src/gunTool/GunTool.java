@@ -24,7 +24,7 @@ public class GunTool implements IGunTool, Comparable<GunTool> {
     }
 
     public void decreaseNumberOfCharge() {
-            --numberOfCharge;
+        --numberOfCharge;
     }
 
     @Override
@@ -42,7 +42,19 @@ public class GunTool implements IGunTool, Comparable<GunTool> {
         return this.compareTo(obj) == 0;
     }
 
+    @Override
+    public int hashCode() {
+        int result = numberOfCharge;
+        result = 31 * result + (gun != null ? gun.hashCode() : 0);
+        return result;
+    }
+
     public String toString() {
-        return "Количество патронов: " + numberOfCharge + ". " + gun.toString();
+        String result = new StringBuilder("Количество патронов: ").
+                append(numberOfCharge).
+                append(". ").
+                append(gun.toString()).
+                toString();
+        return result;
     }
 }

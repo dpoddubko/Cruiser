@@ -35,7 +35,23 @@ public abstract class BaseGun implements Gun, Comparable {
     }
 
     public String toString() {
-        return "Имя оружия: " + nameOfGun + ". Урон, наносимый оружием: " + damage + ". Радиус поражения: " + distanceOfFire + "."+ "\n";
+        String result = new StringBuilder("Имя оружия: ").
+                append(nameOfGun).
+                append(". Урон, наносимый оружием: ").
+                append(damage).
+                append(". Радиус поражения: ").
+                append(distanceOfFire).
+                append(".\n").
+                toString();
+        return result;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = nameOfGun != null ? nameOfGun.hashCode() : 0;
+        result = 31 * result + damage;
+        result = 31 * result + distanceOfFire;
+        return result;
     }
 
     @Override

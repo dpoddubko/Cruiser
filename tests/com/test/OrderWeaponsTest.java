@@ -15,7 +15,7 @@ import java.util.TreeSet;
 import static junit.framework.Assert.assertEquals;
 
 public class OrderWeaponsTest {
-    final static Logger log = Logger.getLogger(OrderWeaponsTest.class);
+    final static Logger LOG = Logger.getLogger(OrderWeaponsTest.class);
 
     @Test
     public void orderWeaponsSetTest() {
@@ -39,8 +39,8 @@ public class OrderWeaponsTest {
 
         GunTool arrWeap[] = new GunTool[weaponSet.size()];
         arrWeap = weaponSet.toArray(arrWeap);
-        log.info(arrWeap);
-        log.info(weaponSet);
+        LOG.info(arrWeap);
+        LOG.info(weaponSet);
 
         assertEquals(first, arrWeap[0]);
         assertEquals(second, arrWeap[1]);
@@ -77,7 +77,7 @@ public class OrderWeaponsTest {
 
         Collections.sort(weaponList);
 
-        log.info("\n" + weaponList);
+        LOG.info("\n" + weaponList);
 
         assertEquals(first, weaponList.get(0));
         assertEquals(second, weaponList.get(1));
