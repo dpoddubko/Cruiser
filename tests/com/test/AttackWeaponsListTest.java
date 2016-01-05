@@ -5,11 +5,8 @@ import cruiser.ProtectedCruiser;
 import gun.BombGun;
 import gun.Gun;
 import gun.MissileSystem;
-import gunTool.GunTool;
 import org.apache.log4j.Logger;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
