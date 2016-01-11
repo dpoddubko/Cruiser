@@ -21,18 +21,18 @@ public class AttackWeaponsListTest {
         BombGun bombGun = new BombGun();
         MissileSystem missileSystem = new MissileSystem();
 
-        int numberOfChargeProtectedCr = protectedCruiser.getBestGun().getNumberOfCharge();
-        Gun bestGunOfProtectedCr = protectedCruiser.getBestGun().getGun();
+        int numberOfChargeProtectedCr = protectedCruiser.getBestGun().get().getNumberOfCharge();
+        Gun bestGunOfProtectedCr = protectedCruiser.getBestGun().get().getGun();
         assertEquals(bombGun, bestGunOfProtectedCr);
-        assertEquals(10, protectedCruiser.getBestGun().getNumberOfCharge());
+        assertEquals(10, protectedCruiser.getBestGun().get().getNumberOfCharge());
 
         LOG.info("\n" + missileCruiser);
         for (int i = 0; i < numberOfChargeProtectedCr + 1; i++)
             protectedCruiser.attack(missileCruiser);
         LOG.info("\n" + protectedCruiser.getWeaponsList());
 
-        assertEquals(missileSystem, protectedCruiser.getBestGun().getGun());
-        assertEquals(24, protectedCruiser.getBestGun().getNumberOfCharge());
+        assertEquals(missileSystem, protectedCruiser.getBestGun().get().getGun());
+        assertEquals(24, protectedCruiser.getBestGun().get().getNumberOfCharge());
 
     }
 }

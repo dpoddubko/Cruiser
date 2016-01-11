@@ -3,8 +3,8 @@ package cruiser;
 import gunTool.GunTool;
 import org.apache.log4j.Logger;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseCruiser implements Cruiser {
     private final int speed;
@@ -35,6 +35,10 @@ public abstract class BaseCruiser implements Cruiser {
         }
     }
 
+    public int getInitialLife() {
+        return initialLife;
+    }
+
     public boolean isAlive() {
         return lifes > 0;
     }
@@ -43,19 +47,38 @@ public abstract class BaseCruiser implements Cruiser {
         lifes -= damage;
     }
 
-    public GunTool getBestGun() {
-        Collections.sort(weaponsList);
-        return weaponsList.get(0);
+    public Optional<GunTool> getBestGun() {
+        Optional<List<GunTool>> list = Optional.ofNullable(weaponsList);
+        Optional<GunTool> bestGun = Optional.empty();
+        int defoltDamage = 0;
+        if (list.isPresent()) {
+            for (GunTool w : weaponsList) {
+                if (w.hasCharge() && w.getGun().getDamage() > defoltDamage) {
+                    defoltDamage = w.getGun().getDamage();
+                    bestGun = Optional.of(w);
+                }
+            }
+        }
+        return bestGun;
     }
 
     public void attack(Cruiser cruiser) {
-        if (isAlive() && getBestGun().hasCharge()) {
-            cruiser.decreaseLife(getBestGun().getGun().getDamage());
-            getBestGun().decreaseNumberOfCharge();
+        if (isAlive() && getBestGun().isPresent()) {
+            cruiser.decreaseLife(getBestGun().get().getGun().getDamage());
+            getBestGun().get().decreaseNumberOfCharge();
         }
     }
 
     public String toString() {
-        return "Название корабля: " + name + ". Скорость движения: " + speed + " узлов" + ". Начальное количество жизней: " + initialLife + ". Оставшееся количество жизней: " + lifes + ". \n";
+        String result = new StringBuilder("Название корабля: ").
+                append(name).
+                append(". Скорость движения: ").
+                append(speed).
+                append(" узлов. Начальное количество жизней: ").
+                append(initialLife).
+                append(". Оставшееся количество жизней: ").
+                append(lifes).append(". \n").
+                toString();
+        return result;
     }
 }
