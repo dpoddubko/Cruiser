@@ -15,7 +15,7 @@ import java.util.TreeSet;
 import static junit.framework.Assert.assertEquals;
 
 public class OrderWeaponsTest {
-    final static Logger LOG = Logger.getLogger(OrderWeaponsTest.class);
+    private final static Logger LOG = Logger.getLogger(OrderWeaponsTest.class);
 
     @Test
     public void orderWeaponsSetTest() {
