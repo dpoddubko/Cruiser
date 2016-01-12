@@ -10,15 +10,14 @@ public abstract class BaseCruiser implements Cruiser {
     private final int speed;
     private final int initialLife;
     private final String name;
-    final static Logger LOG = Logger.getLogger(BaseCruiser.class);
+    private final List<GunTool> weaponsList;
+    private final static Logger LOG = Logger.getLogger(BaseCruiser.class);
+
+    private int lifes;
 
     public List<GunTool> getWeaponsList() {
         return weaponsList;
     }
-
-    private List<GunTool> weaponsList;
-
-    private int lifes;
 
     public BaseCruiser(int speed, int initialLife, String name, List<GunTool> weaponsList) {
         this.speed = speed;
@@ -48,17 +47,15 @@ public abstract class BaseCruiser implements Cruiser {
     }
 
     public Optional<GunTool> getBestGun() {
-        Optional<List<GunTool>> list = Optional.ofNullable(weaponsList);
         Optional<GunTool> bestGun = Optional.empty();
-        int defoltDamage = 0;
-        if (list.isPresent()) {
+        if (weaponsList != null)
             for (GunTool w : weaponsList) {
-                if (w.hasCharge() && w.getGun().getDamage() > defoltDamage) {
-                    defoltDamage = w.getGun().getDamage();
-                    bestGun = Optional.of(w);
+                if (w.hasCharge()) {
+                    if (!bestGun.isPresent()) bestGun = Optional.of(w);
+                    else if (w.getGun().getDamage() > bestGun.get().getGun().getDamage())
+                        bestGun = Optional.of(w);
                 }
             }
-        }
         return bestGun;
     }
 
