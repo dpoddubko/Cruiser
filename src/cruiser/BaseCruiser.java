@@ -3,6 +3,7 @@ package cruiser;
 import gunTool.GunTool;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,16 +16,18 @@ public abstract class BaseCruiser implements Cruiser {
 
     private int lifes;
 
-    public List<GunTool> getWeaponsList() {
-        return weaponsList;
-    }
-
     public BaseCruiser(int speed, int initialLife, String name, List<GunTool> weaponsList) {
         this.speed = speed;
         this.initialLife = initialLife;
         this.lifes = initialLife;
         this.name = name;
-        this.weaponsList = weaponsList;
+        if (weaponsList == null)
+            this.weaponsList = new ArrayList<GunTool>();
+        else this.weaponsList = weaponsList;
+    }
+
+    public List<GunTool> getWeaponsList() {
+        return weaponsList;
     }
 
     public void goForward() {
@@ -48,21 +51,21 @@ public abstract class BaseCruiser implements Cruiser {
 
     public Optional<GunTool> getBestGun() {
         Optional<GunTool> bestGun = Optional.empty();
-        if (weaponsList != null)
-            for (GunTool w : weaponsList) {
-                if (w.hasCharge()) {
-                    if (!bestGun.isPresent()) bestGun = Optional.of(w);
-                    else if (w.getGun().getDamage() > bestGun.get().getGun().getDamage())
-                        bestGun = Optional.of(w);
-                }
+        for (GunTool w : weaponsList) {
+            if (w.hasCharge()) {
+                if (!bestGun.isPresent()) bestGun = Optional.of(w);
+                else if (w.getGun().getDamage() > bestGun.get().getGun().getDamage())
+                    bestGun = Optional.of(w);
             }
+        }
         return bestGun;
     }
 
     public void attack(Cruiser cruiser) {
-        if (isAlive() && getBestGun().isPresent()) {
-            cruiser.decreaseLife(getBestGun().get().getGun().getDamage());
-            getBestGun().get().decreaseNumberOfCharge();
+        Optional<GunTool> bestGun = getBestGun();
+        if (isAlive() && bestGun.isPresent()) {
+            cruiser.decreaseLife(bestGun.get().getGun().getDamage());
+            bestGun.get().decreaseNumberOfCharge();
         }
     }
 
