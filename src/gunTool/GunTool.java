@@ -1,5 +1,6 @@
 package gunTool;
 
+import exeption.MinusException;
 import gun.Gun;
 
 public class GunTool implements IGunTool, Comparable<GunTool> {
@@ -7,8 +8,13 @@ public class GunTool implements IGunTool, Comparable<GunTool> {
     private Gun gun;
 
     public GunTool(int numberOfCharge, Gun gun) {
-        this.numberOfCharge = numberOfCharge;
         this.gun = gun;
+        try {
+            if (numberOfCharge<0) throw new MinusException();
+            this.numberOfCharge = numberOfCharge;
+        }catch(MinusException e){
+            System.out.println(e);
+        }
     }
 
     public boolean hasCharge() {
@@ -24,7 +30,12 @@ public class GunTool implements IGunTool, Comparable<GunTool> {
     }
 
     public void decreaseNumberOfCharge() {
-        --numberOfCharge;
+        try {
+            if (numberOfCharge<0) throw new MinusException();
+            --numberOfCharge;
+        }catch (MinusException e){
+            numberOfCharge=0;
+        }
     }
 
     @Override

@@ -21,9 +21,7 @@ public abstract class BaseCruiser implements Cruiser {
         this.initialLife = initialLife;
         this.lifes = initialLife;
         this.name = name;
-        if (weaponsList == null)
-            this.weaponsList = new ArrayList<GunTool>();
-        else this.weaponsList = weaponsList;
+        this.weaponsList = weaponsList == null ? new ArrayList<GunTool>() : weaponsList;
     }
 
     public List<GunTool> getWeaponsList() {
@@ -62,10 +60,12 @@ public abstract class BaseCruiser implements Cruiser {
     }
 
     public void attack(Cruiser cruiser) {
-        Optional<GunTool> bestGun = getBestGun();
-        if (isAlive() && bestGun.isPresent()) {
-            cruiser.decreaseLife(bestGun.get().getGun().getDamage());
-            bestGun.get().decreaseNumberOfCharge();
+        if (isAlive()) {
+            Optional<GunTool> bestGun = getBestGun();
+            if (bestGun.isPresent()) {
+                cruiser.decreaseLife(bestGun.get().getGun().getDamage());
+                bestGun.get().decreaseNumberOfCharge();
+            }
         }
     }
 
