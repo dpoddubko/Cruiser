@@ -2,8 +2,8 @@ package com.test;
 
 import cruiser.BaseCruiser;
 
-public class EmptyGunCruiser extends BaseCruiser {
-    public EmptyGunCruiser() {
+public class NullWeaponCruiser extends BaseCruiser {
+    public NullWeaponCruiser() {
         super(5, 90, "Крейсер-пустышка", null);
     }
 }

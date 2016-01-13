@@ -26,7 +26,7 @@ public class GunTool implements IGunTool, Comparable<GunTool> {
     }
 
     public void decreaseNumberOfCharge() {
-        if (numberOfCharge < 0) throw new NegativeSignException();
+        if (numberOfCharge == 0) throw new NegativeSignException();
         --numberOfCharge;
     }
 
