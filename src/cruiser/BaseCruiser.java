@@ -1,6 +1,7 @@
 package cruiser;
 
 import gunTool.GunTool;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -70,15 +71,12 @@ public abstract class BaseCruiser implements Cruiser {
     }
 
     public String toString() {
-        String result = new StringBuilder("Название корабля: ").
-                append(name).
-                append(". Скорость движения: ").
-                append(speed).
-                append(" узлов. Начальное количество жизней: ").
-                append(initialLife).
-                append(". Оставшееся количество жизней: ").
-                append(lifes).append(". \n").
+        return new ToStringBuilder(this).
+                append("Название корабля ", name).
+                append(" скорость движения", speed).
+                append(" начальное количество жизней", initialLife).
+                append(" оставшееся количество жизней", lifes).
+                append("\n").
                 toString();
-        return result;
     }
 }

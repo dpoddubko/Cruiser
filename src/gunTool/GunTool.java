@@ -2,6 +2,9 @@ package gunTool;
 
 import exeption.NegativeSignException;
 import gun.Gun;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class GunTool implements IGunTool, Comparable<GunTool> {
     private int numberOfCharge;
@@ -41,24 +44,21 @@ public class GunTool implements IGunTool, Comparable<GunTool> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        GunTool obj = (GunTool) o;
-        return this.compareTo(obj) == 0;
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
-    public int hashCode() {
-        int result = numberOfCharge;
-        result = 31 * result + (gun != null ? gun.hashCode() : 0);
-        return result;
+    public boolean equals(Object o) {
+        GunTool baseGun = (GunTool) o;
+        return EqualsBuilder.reflectionEquals(this, baseGun);
+
     }
 
     public String toString() {
-        String result = new StringBuilder("Количество патронов: ").
-                append(numberOfCharge).
-                append(". ").
+        return new ToStringBuilder(this).
+                append("Количество патронов", numberOfCharge).
                 append(gun.toString()).
                 toString();
-        return result;
     }
 }

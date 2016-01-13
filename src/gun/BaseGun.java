@@ -1,5 +1,10 @@
 package gun;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public abstract class BaseGun implements Gun, Comparable {
     private final String nameOfGun;
     private final int damage;
@@ -26,41 +31,29 @@ public abstract class BaseGun implements Gun, Comparable {
     @Override
     public int compareTo(Object obj) {
         BaseGun entry = (BaseGun) obj;
-
-        int result = entry.damage - damage;
-        if (result != 0) {
-            return (int) result / Math.abs(result);
-        }
-        return 0;
+        return new CompareToBuilder()
+                .append(entry.damage, this.damage)
+                .toComparison();
     }
 
     public String toString() {
-        String result = new StringBuilder("Имя оружия: ").
-                append(nameOfGun).
-                append(". Урон, наносимый оружием: ").
-                append(damage).
-                append(". Радиус поражения: ").
-                append(distanceOfFire).
-                append(".\n").
+        return new ToStringBuilder(this).
+                append("Имя оружия", nameOfGun).
+                append(" урон оружия", damage).
+                append(" радиус поражения", distanceOfFire).
+                append("\n").
                 toString();
-        return result;
     }
 
     @Override
     public int hashCode() {
-        int result = nameOfGun != null ? nameOfGun.hashCode() : 0;
-        result = 31 * result + damage;
-        result = 31 * result + distanceOfFire;
-        return result;
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
         BaseGun baseGun = (BaseGun) o;
-        if (damage != baseGun.damage) return false;
-        if (distanceOfFire != baseGun.distanceOfFire) return false;
-        return !(nameOfGun != null ? !nameOfGun.equals(baseGun.nameOfGun) : baseGun.nameOfGun != null);
+        return EqualsBuilder.reflectionEquals(this, baseGun);
+
     }
 }
