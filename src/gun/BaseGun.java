@@ -52,8 +52,6 @@ public abstract class BaseGun implements Gun, Comparable {
 
     @Override
     public boolean equals(Object o) {
-        BaseGun baseGun = (BaseGun) o;
-        return EqualsBuilder.reflectionEquals(this, baseGun);
-
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 }

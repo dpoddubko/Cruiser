@@ -36,6 +36,13 @@ public abstract class BaseCruiser implements Cruiser {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getLifes() {
+        return lifes;
+    }
     public int getInitialLife() {
         return initialLife;
     }

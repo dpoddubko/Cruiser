@@ -1,6 +1,6 @@
 package cruiser;
 
-interface Cruiser {
+public interface Cruiser {
 
     void goForward();
 

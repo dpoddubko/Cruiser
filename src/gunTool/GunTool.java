@@ -50,9 +50,7 @@ public class GunTool implements IGunTool, Comparable<GunTool> {
 
     @Override
     public boolean equals(Object o) {
-        GunTool baseGun = (GunTool) o;
-        return EqualsBuilder.reflectionEquals(this, baseGun);
-
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
     public String toString() {
