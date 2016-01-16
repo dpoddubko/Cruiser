@@ -33,6 +33,5 @@ public class AttackWeaponsListTest {
 
         assertEquals(missileSystem, protectedCruiser.getBestGun().get().getGun());
         assertEquals(24, protectedCruiser.getBestGun().get().getNumberOfCharge());
-
     }
 }
