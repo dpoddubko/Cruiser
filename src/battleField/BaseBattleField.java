@@ -131,7 +131,10 @@ public class BaseBattleField implements BattleField {
 
     public boolean hasChargeOfTeam(List<Cruiser> team) {
         boolean result = false;
-        for (Cruiser cruiser : team) if (cruiser.getBestGun().get().hasCharge()) result = true;
+        for (Cruiser cruiser : team) {
+            if (cruiser.getBestGun().isPresent()) result = true;
+            break;
+        }
         return result;
     }
 
