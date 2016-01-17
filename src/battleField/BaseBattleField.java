@@ -12,6 +12,7 @@ public class BaseBattleField implements BattleField {
     private ArrayList<Cruiser> whiteTeam;
     private ArrayList<Cruiser> blackTeam;
     private String massage = "Бой еще не окончен!";
+    private int randomSize = 3;
 
     public BaseBattleField() {
         whiteTeam = createCruisersForTeam();
@@ -67,8 +68,7 @@ public class BaseBattleField implements BattleField {
     public ArrayList<Cruiser> createCruisersForTeam() {
         ShipsBuilder result = new ShipsBuilder();
         for (int i = 0; i < 10; i++) {
-            int rnd = (int) (Math.random() * 3);
-            switch (rnd) {
+            switch (randomNum(randomSize)) {
                 case 0:
                     result.addMissileCruiser();
                     break;
@@ -80,7 +80,7 @@ public class BaseBattleField implements BattleField {
                     break;
             }
         }
-        return result.getCruisersList();
+        return result.build();
     }
 
     @Override
@@ -105,7 +105,7 @@ public class BaseBattleField implements BattleField {
     public StringBuilder listCruisersInfo(ArrayList<Cruiser> team) {
         StringBuilder out = new StringBuilder("");
         for (Cruiser cruiser : team)
-            out.append(cruiser.getName()) .
+            out.append(cruiser.getName()).
                     append(". Осталось жизней: ").
                     append(cruiser.getLifes()).
                     append(".\n");
@@ -127,21 +127,21 @@ public class BaseBattleField implements BattleField {
 
     public boolean hasChargeOfTeam(ArrayList<Cruiser> team) {
         boolean result = false;
-        for (int i = 0; i < team.size(); i++) {
-            if (team.get(i).getBestGun().get().hasCharge()) result = true;
-        }
+        for (Cruiser cruiser : team) if (cruiser.getBestGun().get().hasCharge()) result = true;
         return result;
     }
 
     public int lifeSumOfTeam(ArrayList<Cruiser> team) {
         int result = 0;
-        for (int i = 0; i < team.size(); i++) {
-            result += team.get(i).getLifes();
-        }
+        for (Cruiser cruiser : team) result += cruiser.getLifes();
         return result;
     }
 
     public int randomNum(int size) {
-        return (int) Math.random() * size;
+        return (int) (Math.random() * size);
+    }
+
+    public void setRandomSize(int randomSize) {
+        this.randomSize = randomSize;
     }
 }

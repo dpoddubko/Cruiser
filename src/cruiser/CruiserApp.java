@@ -10,6 +10,6 @@ public class CruiserApp {
         factory.addProtectedCruisers();
         factory.addProtectedCruisers();
         factory.addProtectedCruisers();
-        factory.getCruisersList().get(0).attack(factory.getCruisersList().get(1));
+        factory.build().get(0).attack(factory.build().get(1));
     }
 }

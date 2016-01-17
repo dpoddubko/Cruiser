@@ -17,7 +17,7 @@ public class ShipsBuilder extends ArrayList<BaseCruiser> {
     public void addCruiserHelicopterCarriers() {
         baseCruisersList.add(new CruiserHelicopterCarriers());
     }
-    public ArrayList<Cruiser> getCruisersList() {
+    public ArrayList<Cruiser> build() {
         return baseCruisersList;
     }
 
