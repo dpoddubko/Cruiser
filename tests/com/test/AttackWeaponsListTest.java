@@ -8,7 +8,7 @@ import gun.MissileSystem;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class AttackWeaponsListTest {
     final static Logger LOG = Logger.getLogger(AttackWeaponsListTest.class);

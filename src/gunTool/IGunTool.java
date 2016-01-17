@@ -8,4 +8,5 @@ public interface IGunTool {
     int getNumberOfCharge();
 
     void decreaseNumberOfCharge();
+    boolean hasCharge();
 }

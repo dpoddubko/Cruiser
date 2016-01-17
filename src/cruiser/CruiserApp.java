@@ -1,13 +1,15 @@
 package cruiser;
 
+import battleField.ShipsBuilder;
+
 public class CruiserApp {
     public static void main(String[] args) {
-        ShipFactory factory = new ShipFactory();
+        ShipsBuilder factory = new ShipsBuilder();
         factory.addMissileCruiser();
         factory.addMissileCruiser();
         factory.addProtectedCruisers();
         factory.addProtectedCruisers();
         factory.addProtectedCruisers();
-        factory.getListMissileCr().get(0).attack(factory.getListProtectCr().get(0));
+        factory.getCruisersList().get(0).attack(factory.getCruisersList().get(1));
     }
 }

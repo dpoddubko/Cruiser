@@ -1,6 +1,9 @@
 package cruiser;
 
 import gunTool.GunTool;
+import gunTool.IGunTool;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
@@ -43,6 +46,7 @@ public abstract class BaseCruiser implements Cruiser {
     public int getLifes() {
         return lifes;
     }
+
     public int getInitialLife() {
         return initialLife;
     }
@@ -55,8 +59,8 @@ public abstract class BaseCruiser implements Cruiser {
         lifes -= damage;
     }
 
-    public Optional<GunTool> getBestGun() {
-        Optional<GunTool> bestGun = Optional.empty();
+    public Optional<IGunTool> getBestGun() {
+        Optional<IGunTool> bestGun = Optional.empty();
         for (GunTool w : weaponsList) {
             if (w.hasCharge()) {
                 if (!bestGun.isPresent()) bestGun = Optional.of(w);
@@ -69,12 +73,22 @@ public abstract class BaseCruiser implements Cruiser {
 
     public void attack(Cruiser cruiser) {
         if (isAlive()) {
-            Optional<GunTool> bestGun = getBestGun();
+            Optional<IGunTool> bestGun = getBestGun();
             if (bestGun.isPresent()) {
                 cruiser.decreaseLife(bestGun.get().getGun().getDamage());
                 bestGun.get().decreaseNumberOfCharge();
             }
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
     public String toString() {

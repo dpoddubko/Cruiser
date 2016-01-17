@@ -1,14 +1,11 @@
 package battleField;
 
-import cruiser.BaseCruiser;
-import cruiser.CruiserHelicopterCarriers;
-import cruiser.MissileCruiser;
-import cruiser.ProtectedCruiser;
+import cruiser.*;
 
 import java.util.ArrayList;
 
-public class ShipsBuilder {
-    private ArrayList<BaseCruiser> baseCruisersList = new ArrayList<>();
+public class ShipsBuilder extends ArrayList<BaseCruiser> {
+    private ArrayList<Cruiser> baseCruisersList = new ArrayList<>();
     public void addMissileCruiser() {
         baseCruisersList.add(new MissileCruiser());
     }
@@ -20,7 +17,7 @@ public class ShipsBuilder {
     public void addCruiserHelicopterCarriers() {
         baseCruisersList.add(new CruiserHelicopterCarriers());
     }
-    public ArrayList<BaseCruiser> getCruisersList() {
+    public ArrayList<Cruiser> getCruisersList() {
         return baseCruisersList;
     }
 
