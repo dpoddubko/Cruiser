@@ -4,13 +4,13 @@ import cruiser.Cruiser;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class BaseBattleField implements BattleField {
     private final static Logger LOG = Logger.getLogger(BattleField.class);
 
-    private ArrayList<Cruiser> whiteTeam;
-    private ArrayList<Cruiser> blackTeam;
+    private List<Cruiser> whiteTeam;
+    private List<Cruiser> blackTeam;
     private String massage = "Бой еще не окончен!";
     private int randomSize = 3;
 
@@ -47,16 +47,20 @@ public class BaseBattleField implements BattleField {
                     massage = "Черные победили!";
                     break;
                 } else if (!hasChargeOfTeam(whiteTeam) && !hasChargeOfTeam(blackTeam)) {
-                    if (whiteTeam.size() > blackTeam.size())
+                    if (whiteTeam.size() > blackTeam.size()) {
                         massage = "Белые победили!";
-                    else if (whiteTeam.size() < blackTeam.size())
+                        break;
+                    } else if (whiteTeam.size() < blackTeam.size()) {
                         massage = "Черные победили!";
-                    else if (whiteTeam.size() == blackTeam.size()) {
-                        if (lifeSumOfTeam(whiteTeam) > lifeSumOfTeam(blackTeam))
+                        break;
+                    } else if (whiteTeam.size() == blackTeam.size()) {
+                        if (lifeSumOfTeam(whiteTeam) > lifeSumOfTeam(blackTeam)) {
                             massage = "Белые победили!";
-                        else if (lifeSumOfTeam(whiteTeam) < lifeSumOfTeam(blackTeam))
+                            break;
+                        } else if (lifeSumOfTeam(whiteTeam) < lifeSumOfTeam(blackTeam)) {
                             massage = "Черные победили!";
-                        else massage = "Победила ничья!";
+                            break;
+                        } else massage = "Победила ничья!";
                     }
                     break;
                 }
@@ -65,7 +69,7 @@ public class BaseBattleField implements BattleField {
     }
 
     @Override
-    public ArrayList<Cruiser> createCruisersForTeam() {
+    public List<Cruiser> createCruisersForTeam() {
         ShipsBuilder result = new ShipsBuilder();
         for (int i = 0; i < 10; i++) {
             switch (randomNum(randomSize)) {
@@ -90,7 +94,7 @@ public class BaseBattleField implements BattleField {
         LOG.info(massage);
     }
 
-    public String stateTeams(ArrayList<Cruiser> team, String colourOfTeam) {
+    public String stateTeams(List<Cruiser> team, String colourOfTeam) {
         String result = new StringBuilder("\nКоманда ").
                 append(colourOfTeam).
                 append(":\n").
@@ -102,7 +106,7 @@ public class BaseBattleField implements BattleField {
         return result;
     }
 
-    public StringBuilder listCruisersInfo(ArrayList<Cruiser> team) {
+    public StringBuilder listCruisersInfo(List<Cruiser> team) {
         StringBuilder out = new StringBuilder("");
         for (Cruiser cruiser : team)
             out.append(cruiser.getName()).
@@ -117,21 +121,21 @@ public class BaseBattleField implements BattleField {
         return ToStringBuilder.reflectionToString(this);
     }
 
-    public ArrayList<Cruiser> getWhiteTeam() {
+    public List<Cruiser> getWhiteTeam() {
         return whiteTeam;
     }
 
-    public ArrayList<Cruiser> getBlackTeam() {
+    public List<Cruiser> getBlackTeam() {
         return blackTeam;
     }
 
-    public boolean hasChargeOfTeam(ArrayList<Cruiser> team) {
+    public boolean hasChargeOfTeam(List<Cruiser> team) {
         boolean result = false;
         for (Cruiser cruiser : team) if (cruiser.getBestGun().get().hasCharge()) result = true;
         return result;
     }
 
-    public int lifeSumOfTeam(ArrayList<Cruiser> team) {
+    public int lifeSumOfTeam(List<Cruiser> team) {
         int result = 0;
         for (Cruiser cruiser : team) result += cruiser.getLifes();
         return result;

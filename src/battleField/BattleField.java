@@ -2,12 +2,12 @@ package battleField;
 
 import cruiser.Cruiser;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface BattleField {
     void fight();
 
-    ArrayList<Cruiser> createCruisersForTeam();
+    List<Cruiser> createCruisersForTeam();
 
     void logStateTeams();
 }

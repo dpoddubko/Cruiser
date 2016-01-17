@@ -7,7 +7,7 @@ import cruiser.Cruiser;
 import cruiser.MissileCruiser;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -27,15 +27,9 @@ public class BattleFieldTest {
     }
 
     @Test
-    public void typeTest() {
+    public void shipsBuilderNotNullTest() {
         ShipsBuilder shipsBuilder = new ShipsBuilder();
-        BaseBattleField battleField = new BaseBattleField();
-
-        assertTrue(shipsBuilder.build() instanceof ArrayList);
-        assertTrue(battleField.createCruisersForTeam() instanceof ArrayList);
-        assertTrue(battleField.getWhiteTeam() instanceof ArrayList);
-        assertTrue(battleField.getBlackTeam() instanceof ArrayList);
-
+        assertNotNull(shipsBuilder.build());
     }
 
     @Test
@@ -49,7 +43,7 @@ public class BattleFieldTest {
             assertTrue(cruiser instanceof BaseCruiser);
         }
         battleField.setRandomSize(0);
-        ArrayList<Cruiser> list = battleField.createCruisersForTeam();
+        List<Cruiser> list = battleField.createCruisersForTeam();
         for (Cruiser cruiser : list) assertTrue(cruiser.getClass().equals(MissileCruiser.class));
     }
 }

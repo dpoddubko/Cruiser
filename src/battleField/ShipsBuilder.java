@@ -3,9 +3,10 @@ package battleField;
 import cruiser.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShipsBuilder extends ArrayList<BaseCruiser> {
-    private ArrayList<Cruiser> baseCruisersList = new ArrayList<>();
+    private List<Cruiser> baseCruisersList = new ArrayList<>();
     public void addMissileCruiser() {
         baseCruisersList.add(new MissileCruiser());
     }
@@ -17,7 +18,7 @@ public class ShipsBuilder extends ArrayList<BaseCruiser> {
     public void addCruiserHelicopterCarriers() {
         baseCruisersList.add(new CruiserHelicopterCarriers());
     }
-    public ArrayList<Cruiser> build() {
+    public List<Cruiser> build() {
         return baseCruisersList;
     }
 
