@@ -14,18 +14,17 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-
 public class BattleFieldTest {
     @Test
     public void randomNumTest() {
         BaseBattleField battleField = new BaseBattleField();
         for (int i = 0; i < 10; i++) {
-            int mynum = battleField.randomNum(10);
-            assertTrue(0 <= mynum && mynum <= 9);
+            int ranNum = battleField.randomNum(10);
+            assertTrue(0 <= ranNum && ranNum <= 9);
         }
         for (int i = 0; i < 10; i++) {
-            int mynum = battleField.randomNum(0);
-            assertEquals(0, mynum);
+            int ranNum = battleField.randomNum(0);
+            assertEquals(0, ranNum);
         }
     }
 
@@ -121,6 +120,5 @@ public class BattleFieldTest {
         battleField.getWhiteTeam().get(0).setLife(30);
         battleField.fight();
         assertEquals("У команд нет патронов, количество кораблей одинаковое, но у белых больше жизней. Белые победили!", battleField.getMassage());
-
     }
 }
