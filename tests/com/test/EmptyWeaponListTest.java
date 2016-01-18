@@ -1,6 +1,7 @@
 package com.test;
 
 import cruiser.MissileCruiser;
+import cruiserForTest.NullWeaponCruiser;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

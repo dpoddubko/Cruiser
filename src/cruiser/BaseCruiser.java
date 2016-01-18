@@ -18,12 +18,12 @@ public abstract class BaseCruiser implements Cruiser {
     private final List<GunTool> weaponsList;
     private final static Logger LOG = Logger.getLogger(BaseCruiser.class);
 
-    private int lifes;
+    private int life;
 
     public BaseCruiser(int speed, int initialLife, String name, List<GunTool> weaponsList) {
         this.speed = speed;
         this.initialLife = initialLife;
-        this.lifes = initialLife;
+        this.life = initialLife;
         this.name = name;
         this.weaponsList = weaponsList == null ? new ArrayList<GunTool>() : weaponsList;
     }
@@ -33,7 +33,7 @@ public abstract class BaseCruiser implements Cruiser {
     }
 
     public void goForward() {
-        if (lifes > (initialLife / 3)) {
+        if (life > (initialLife / 3)) {
             LOG.info("Скорость передвижения крейсера: " +
                     speed + " узлов.");
         }
@@ -43,20 +43,24 @@ public abstract class BaseCruiser implements Cruiser {
         return name;
     }
 
-    public int getLifes() {
-        return lifes;
+    public int getLife() {
+        return life;
     }
 
     public int getInitialLife() {
         return initialLife;
     }
 
+    public void setLife(int life) {
+        this.life = life;
+    }
+
     public boolean isAlive() {
-        return lifes > 0;
+        return life > 0;
     }
 
     public void decreaseLife(int damage) {
-        lifes -= damage;
+        life -= damage;
     }
 
     public Optional<IGunTool> getBestGun() {
@@ -96,7 +100,7 @@ public abstract class BaseCruiser implements Cruiser {
                 append("Название корабля ", name).
                 append(" скорость движения", speed).
                 append(" начальное количество жизней", initialLife).
-                append(" оставшееся количество жизней", lifes).
+                append(" оставшееся количество жизней", life).
                 append("\n").
                 toString();
     }

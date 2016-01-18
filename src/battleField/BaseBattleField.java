@@ -23,49 +23,48 @@ public class BaseBattleField implements BattleField {
     public void fight() {
         if (whiteTeam.size() != 0 && blackTeam.size() != 0)
             for (int i = 0; i < 10; i++) {
-                int rndWhite = randomNum(whiteTeam.size() - 1);
-                int rndBlack = randomNum(blackTeam.size() - 1);
-                whiteTeam.get(rndWhite).attack(blackTeam.get(rndBlack));
-                if (!blackTeam.get(rndBlack).isAlive()) {
-                    blackTeam.remove(rndBlack);
-                    if (blackTeam.size() == 0) {
-                        massage = "Белые победили!";
-                        break;
-                    }
-                    rndBlack = randomNum(blackTeam.size() - 1);
-                }
-                blackTeam.get(rndBlack).attack(whiteTeam.get(rndWhite));
-                if (!whiteTeam.get(rndWhite).isAlive()) {
-                    whiteTeam.remove(rndWhite);
-                    rndWhite = randomNum(whiteTeam.size() - 1);
-                }
-                if (whiteTeam.size() != 0 && blackTeam.size() == 0) {
-                    massage = "Белые победили!";
+                if (attackTeam(whiteTeam, blackTeam) == 0) {
+                    massage = "У черных закончились корабли. Белые победили!";
                     break;
                 }
-                if (whiteTeam.isEmpty() && blackTeam.size() != 0) {
-                    massage = "Черные победили!";
+                if (attackTeam(blackTeam, whiteTeam) == 0) {
+                    massage = "У белых закончились корабли. Черные победили!";
                     break;
-                } else if (!hasChargeOfTeam(whiteTeam) && !hasChargeOfTeam(blackTeam)) {
-                    if (whiteTeam.size() > blackTeam.size()) {
-                        massage = "Белые победили!";
-                        break;
-                    } else if (whiteTeam.size() < blackTeam.size()) {
-                        massage = "Черные победили!";
-                        break;
-                    } else if (whiteTeam.size() == blackTeam.size()) {
-                        if (lifeSumOfTeam(whiteTeam) > lifeSumOfTeam(blackTeam)) {
-                            massage = "Белые победили!";
-                            break;
-                        } else if (lifeSumOfTeam(whiteTeam) < lifeSumOfTeam(blackTeam)) {
-                            massage = "Черные победили!";
-                            break;
-                        } else massage = "Победила ничья!";
-                    }
+                }
+                if (!hasChargeOfTeam(whiteTeam) && !hasChargeOfTeam(blackTeam)) {
+                    teamsHaveNoCharge();
                     break;
                 }
             }
         logStateTeams();
+    }
+
+    public int attackTeam(List<Cruiser> attacker, List<Cruiser> victim) {
+        int rndAttacker = randomNum(attacker.size() - 1);
+        int rndVictim = randomNum(victim.size() - 1);
+        attacker.get(rndAttacker).attack(victim.get(rndVictim));
+        if (!victim.get(rndVictim).isAlive()) {
+            victim.remove(rndVictim);
+            if (victim.isEmpty()) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+    public void teamsHaveNoCharge() {
+        if (whiteTeam.size() > blackTeam.size()) {
+            massage = "У команд нет патронов, но белых кораблей осталось больше. Белые победили!";
+        } else if (whiteTeam.size() < blackTeam.size()) {
+            massage = "У команд нет патронов, но черных кораблей осталось больше. Черные победили!";
+        } else if (whiteTeam.size() == blackTeam.size()) {
+            if (lifeSumOfTeam(whiteTeam) > lifeSumOfTeam(blackTeam)) {
+                massage = "У команд нет патронов, количество кораблей одинаковое, но у белых больше жизней. Белые победили!";
+            } else if (lifeSumOfTeam(whiteTeam) < lifeSumOfTeam(blackTeam)) {
+                massage = "У команд нет патронов, количество кораблей одинаковое, но у черных больше жизней. Черные победили!";
+            } else
+                massage = "У команд нет патронов, количество кораблей одинаковое, количество жизней одинаковое. Победила ничья!";
+        }
     }
 
     @Override
@@ -95,7 +94,7 @@ public class BaseBattleField implements BattleField {
     }
 
     public String stateTeams(List<Cruiser> team, String colourOfTeam) {
-        String result = new StringBuilder("\nКоманда ").
+        String result = new StringBuilder("\n\nКоманда ").
                 append(colourOfTeam).
                 append(":\n").
                 append("Крейсер(ы), шт.: ").
@@ -111,7 +110,7 @@ public class BaseBattleField implements BattleField {
         for (Cruiser cruiser : team)
             out.append(cruiser.getName()).
                     append(". Осталось жизней: ").
-                    append(cruiser.getLifes()).
+                    append(cruiser.getLife()).
                     append(".\n");
         return out;
     }
@@ -140,7 +139,7 @@ public class BaseBattleField implements BattleField {
 
     public int lifeSumOfTeam(List<Cruiser> team) {
         int result = 0;
-        for (Cruiser cruiser : team) result += cruiser.getLifes();
+        for (Cruiser cruiser : team) result += cruiser.getLife();
         return result;
     }
 
@@ -150,5 +149,17 @@ public class BaseBattleField implements BattleField {
 
     public void setRandomSize(int randomSize) {
         this.randomSize = randomSize;
+    }
+
+    public void setWhiteTeam(List<Cruiser> whiteTeam) {
+        this.whiteTeam = whiteTeam;
+    }
+
+    public void setBlackTeam(List<Cruiser> blackTeam) {
+        this.blackTeam = blackTeam;
+    }
+
+    public String getMassage() {
+        return massage;
     }
 }

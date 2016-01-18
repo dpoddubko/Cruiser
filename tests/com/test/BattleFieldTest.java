@@ -5,8 +5,11 @@ import battleField.ShipsBuilder;
 import cruiser.BaseCruiser;
 import cruiser.Cruiser;
 import cruiser.MissileCruiser;
+import cruiser.ProtectedCruiser;
+import cruiserForTest.NullWeaponCruiser;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -45,5 +48,79 @@ public class BattleFieldTest {
         battleField.setRandomSize(0);
         List<Cruiser> list = battleField.createCruisersForTeam();
         for (Cruiser cruiser : list) assertTrue(cruiser.getClass().equals(MissileCruiser.class));
+    }
+
+    @Test
+    public void teamsHaveNoChargeTest() {
+        BaseBattleField battleField = new BaseBattleField();
+        List<Cruiser> wTeam = new ArrayList<>();
+        List<Cruiser> bTeam = new ArrayList<>();
+        wTeam.add(new NullWeaponCruiser());
+        wTeam.add(new NullWeaponCruiser());
+        bTeam.add(new NullWeaponCruiser());
+        battleField.setWhiteTeam(wTeam);
+        battleField.setBlackTeam(bTeam);
+        battleField.teamsHaveNoCharge();
+        assertEquals("У команд нет патронов, но белых кораблей осталось больше. Белые победили!", battleField.getMassage());
+        bTeam.add(new NullWeaponCruiser());
+        wTeam.remove(0);
+        battleField.teamsHaveNoCharge();
+        assertEquals("У команд нет патронов, но черных кораблей осталось больше. Черные победили!", battleField.getMassage());
+        wTeam.add(new NullWeaponCruiser());
+        battleField.teamsHaveNoCharge();
+        assertEquals("У команд нет патронов, количество кораблей одинаковое, количество жизней одинаковое. Победила ничья!", battleField.getMassage());
+        wTeam.get(0).setLife(20);
+        battleField.teamsHaveNoCharge();
+        assertEquals("У команд нет патронов, количество кораблей одинаковое, но у белых больше жизней. Белые победили!", battleField.getMassage());
+        bTeam.get(0).setLife(30);
+        battleField.teamsHaveNoCharge();
+        assertEquals("У команд нет патронов, количество кораблей одинаковое, но у черных больше жизней. Черные победили!", battleField.getMassage());
+    }
+
+    @Test
+    public void attackTeam() {
+        BaseBattleField battleField = new BaseBattleField();
+        List<Cruiser> wTeam = new ArrayList<>();
+        List<Cruiser> bTeam = new ArrayList<>();
+        wTeam.add(new ProtectedCruiser());
+        bTeam.add(new NullWeaponCruiser());
+        bTeam.add(new NullWeaponCruiser());
+        battleField.setWhiteTeam(wTeam);
+        battleField.setBlackTeam(bTeam);
+        assertEquals(1, battleField.attackTeam(wTeam, bTeam));
+        assertEquals(0, battleField.attackTeam(wTeam, bTeam));
+    }
+
+    @Test
+    public void fightTest() {
+        BaseBattleField battleField = new BaseBattleField();
+        List<Cruiser> wTeam = new ArrayList<>();
+        List<Cruiser> bTeam = new ArrayList<>();
+        wTeam.add(new ProtectedCruiser());
+        bTeam.add(new NullWeaponCruiser());
+        battleField.setWhiteTeam(wTeam);
+        battleField.setBlackTeam(bTeam);
+        battleField.fight();
+        assertEquals("У черных закончились корабли. Белые победили!", battleField.getMassage());
+
+        List<Cruiser> wTeam1 = new ArrayList<>();
+        List<Cruiser> bTeam1 = new ArrayList<>();
+        wTeam1.add(new NullWeaponCruiser());
+        bTeam1.add(new NullWeaponCruiser());
+        battleField.setWhiteTeam(wTeam1);
+        battleField.setBlackTeam(bTeam1);
+        battleField.fight();
+        assertEquals("У команд нет патронов, количество кораблей одинаковое, количество жизней одинаковое. Победила ничья!", battleField.getMassage());
+
+        List<Cruiser> wTeam2 = new ArrayList<>();
+        List<Cruiser> bTeam2 = new ArrayList<>();
+        wTeam2.add(new NullWeaponCruiser());
+        bTeam2.add(new NullWeaponCruiser());
+        battleField.setWhiteTeam(wTeam2);
+        battleField.setBlackTeam(bTeam2);
+        battleField.getWhiteTeam().get(0).setLife(30);
+        battleField.fight();
+        assertEquals("У команд нет патронов, количество кораблей одинаковое, но у белых больше жизней. Белые победили!", battleField.getMassage());
+
     }
 }

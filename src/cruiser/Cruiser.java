@@ -10,10 +10,16 @@ public interface Cruiser {
 
     void attack(Cruiser cruiser);
 
+    void setLife(int life);
+
     void decreaseLife(int damage);
+
     boolean isAlive();
+
     String getName();
-    int getLifes();
+
+    int getLife();
+
     Optional<IGunTool> getBestGun();
 
 }
