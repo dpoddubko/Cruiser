@@ -22,7 +22,7 @@ public class BaseBattleField implements BattleField {
     @Override
     public void fight() {
         if (whiteTeam.size() != 0 && blackTeam.size() != 0)
-            for (int i = 0; i < 10; i++) {
+            while (true){
                 if (attackTeam(whiteTeam, blackTeam) == 0) {
                     massage = "У черных закончились корабли. Белые победили!";
                     break;
