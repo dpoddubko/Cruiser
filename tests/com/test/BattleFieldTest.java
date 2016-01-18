@@ -86,8 +86,8 @@ public class BattleFieldTest {
         bTeam.add(new NullWeaponCruiser());
         battleField.setWhiteTeam(wTeam);
         battleField.setBlackTeam(bTeam);
-        assertEquals(1, battleField.attackTeam(wTeam, bTeam));
-        assertEquals(0, battleField.attackTeam(wTeam, bTeam));
+        assertEquals(false, battleField.attackTeam(wTeam, bTeam));
+        assertEquals(true, battleField.attackTeam(wTeam, bTeam));
     }
 
     @Test
@@ -99,7 +99,7 @@ public class BattleFieldTest {
         bTeam.add(new NullWeaponCruiser());
         battleField.setWhiteTeam(wTeam);
         battleField.setBlackTeam(bTeam);
-        battleField.fight();
+        battleField.doRound();
         assertEquals("У черных закончились корабли. Белые победили!", battleField.getMassage());
 
         List<Cruiser> wTeam1 = new ArrayList<>();
@@ -108,7 +108,7 @@ public class BattleFieldTest {
         bTeam1.add(new NullWeaponCruiser());
         battleField.setWhiteTeam(wTeam1);
         battleField.setBlackTeam(bTeam1);
-        battleField.fight();
+        battleField.doRound();
         assertEquals("У команд нет патронов, количество кораблей одинаковое, количество жизней одинаковое. Победила ничья!", battleField.getMassage());
 
         List<Cruiser> wTeam2 = new ArrayList<>();
@@ -118,7 +118,7 @@ public class BattleFieldTest {
         battleField.setWhiteTeam(wTeam2);
         battleField.setBlackTeam(bTeam2);
         battleField.getWhiteTeam().get(0).setLife(30);
-        battleField.fight();
+        battleField.doRound();
         assertEquals("У команд нет патронов, количество кораблей одинаковое, но у белых больше жизней. Белые победили!", battleField.getMassage());
     }
 }
