@@ -5,7 +5,7 @@ import cruiser.Cruiser;
 import java.util.List;
 
 public interface BattleField {
-    void fight();
+    void doRound();
 
     List<Cruiser> createCruisersForTeam();
 

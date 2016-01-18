@@ -19,37 +19,44 @@ public class BaseBattleField implements BattleField {
         blackTeam = createCruisersForTeam();
     }
 
-    @Override
     public void fight() {
-        if (whiteTeam.size() != 0 && blackTeam.size() != 0)
-            while (true){
-                if (attackTeam(whiteTeam, blackTeam) == 0) {
-                    massage = "У черных закончились корабли. Белые победили!";
-                    break;
-                }
-                if (attackTeam(blackTeam, whiteTeam) == 0) {
-                    massage = "У белых закончились корабли. Черные победили!";
-                    break;
-                }
-                if (!hasChargeOfTeam(whiteTeam) && !hasChargeOfTeam(blackTeam)) {
-                    teamsHaveNoCharge();
-                    break;
-                }
-            }
         logStateTeams();
+
+        while (canFight()) {
+            doRound();
+            logStateTeams();
+        }
     }
 
-    public int attackTeam(List<Cruiser> attacker, List<Cruiser> victim) {
+    @Override
+    public void doRound() {
+        for (int i = 0; i < 10; i++) {
+            if (attackTeam(whiteTeam, blackTeam)) {
+                massage = "У черных закончились корабли. Белые победили!";
+                break;
+            }
+            if (attackTeam(blackTeam, whiteTeam)) {
+                massage = "У белых закончились корабли. Черные победили!";
+                break;
+            }
+            if (!hasChargeOfTeam(whiteTeam) && !hasChargeOfTeam(blackTeam)) {
+                teamsHaveNoCharge();
+                break;
+            }
+        }
+    }
+
+    public boolean attackTeam(List<Cruiser> attacker, List<Cruiser> victim) {
         int rndAttacker = randomNum(attacker.size() - 1);
         int rndVictim = randomNum(victim.size() - 1);
         attacker.get(rndAttacker).attack(victim.get(rndVictim));
         if (!victim.get(rndVictim).isAlive()) {
             victim.remove(rndVictim);
             if (victim.isEmpty()) {
-                return 0;
+                return true;
             }
         }
-        return 1;
+        return false;
     }
 
     public void teamsHaveNoCharge() {
@@ -115,6 +122,10 @@ public class BaseBattleField implements BattleField {
         return out;
     }
 
+    public boolean canFight() {
+        return !whiteTeam.isEmpty() && !blackTeam.isEmpty();
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
@@ -129,12 +140,10 @@ public class BaseBattleField implements BattleField {
     }
 
     public boolean hasChargeOfTeam(List<Cruiser> team) {
-        boolean result = false;
         for (Cruiser cruiser : team) {
-            if (cruiser.getBestGun().isPresent()) result = true;
-            break;
+            if (cruiser.getBestGun().isPresent()) return true;
         }
-        return result;
+        return false;
     }
 
     public int lifeSumOfTeam(List<Cruiser> team) {
