@@ -1,7 +1,6 @@
 package battleField;
 
 import cruiser.Cruiser;
-import exeption.IllegalValueException;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
@@ -13,12 +12,7 @@ public class BaseBattleField implements BattleField {
 
     private List<Cruiser> whiteTeam;
     private List<Cruiser> blackTeam;
-    private int randomSize = 3;
 
-    public BaseBattleField() {
-        whiteTeam = createCruisersForTeam();
-        blackTeam = createCruisersForTeam();
-    }
 
     public BaseBattleField(List<Cruiser> whiteTeam, List<Cruiser> blackTeam) {
         this.whiteTeam = whiteTeam;
@@ -35,27 +29,39 @@ public class BaseBattleField implements BattleField {
     }
 
     @Override
-    public int doRound() {
+    public Variants doRound() {
         for (int i = 0; i < NUMBER; i++) {
             if (attack(whiteTeam, blackTeam)) {
-                LOG.info("У черных закончились корабли. Белые победили!");
-                return 1;
+                return Variants.WHITE_TEAM_WIN;
             }
             if (attack(blackTeam, whiteTeam)) {
-                LOG.info("У белых закончились корабли. Черные победили!");
-                return 2;
+                return Variants.BLACK_TEAM_WIN;
             }
             if (!hasCharge(whiteTeam) && !hasCharge(blackTeam)) {
-                return teamsHaveNoCharge();
+                int whiteSize = whiteTeam.size();
+                int blackSize = blackTeam.size();
+                int whiteLife = lifeSumOfTeam(whiteTeam);
+                int blackLife = lifeSumOfTeam(blackTeam);
+                if (whiteSize > blackSize) {
+                    return Variants.WHITE_TEAM_WIN;
+                } else if (whiteSize < blackSize) {
+                    return Variants.BLACK_TEAM_WIN;
+                } else if (whiteSize == blackSize) {
+                    if (whiteLife > blackLife) {
+                        return Variants.WHITE_TEAM_WIN;
+                    } else if (whiteLife < blackLife) {
+                        return Variants.BLACK_TEAM_WIN;
+                    }
+                }
+                return Variants.TIE;
             }
         }
-        LOG.info("И вновь продолжается бой!");
-        return 0;
+        return Variants.CONTINUE;
     }
 
     public boolean attack(List<Cruiser> attacker, List<Cruiser> victim) {
-        int rndAttacker = chooseCruiser(attacker.size() - 1);
-        int rndVictim = chooseCruiser(victim.size() - 1);
+        int rndAttacker = ShipsBuilder.chooseCruiser(attacker.size() - 1);
+        int rndVictim = ShipsBuilder.chooseCruiser(victim.size() - 1);
         attacker.get(rndAttacker).attack(victim.get(rndVictim));
         if (!victim.get(rndVictim).isAlive()) {
             victim.remove(rndVictim);
@@ -64,47 +70,6 @@ public class BaseBattleField implements BattleField {
             }
         }
         return false;
-    }
-
-    public int teamsHaveNoCharge() {
-        if (whiteTeam.size() > blackTeam.size()) {
-            LOG.info("У команд нет патронов, но белых кораблей осталось больше. Белые победили!");
-            return 3;
-        } else if (whiteTeam.size() < blackTeam.size()) {
-            LOG.info("У команд нет патронов, но черных кораблей осталось больше. Черные победили!");
-            return 4;
-        } else if (whiteTeam.size() == blackTeam.size()) {
-            if (lifeSumOfTeam(whiteTeam) > lifeSumOfTeam(blackTeam)) {
-                LOG.info("У команд нет патронов, количество кораблей одинаковое, но у белых больше жизней. Белые победили!");
-                return 5;
-            } else if (lifeSumOfTeam(whiteTeam) < lifeSumOfTeam(blackTeam)) {
-                LOG.info("У команд нет патронов, количество кораблей одинаковое, но у черных больше жизней. Черные победили!");
-                return 6;
-            } else
-                LOG.info("У команд нет патронов, количество кораблей одинаковое, количество жизней одинаковое. Победила ничья!");
-        }
-        return 7;
-    }
-
-    @Override
-    public List<Cruiser> createCruisersForTeam() {
-        ShipsBuilder result = new ShipsBuilder();
-        for (int i = 0; i < NUMBER; i++) {
-            switch (chooseCruiser(randomSize)) {
-                case 0:
-                    result.addMissileCruiser();
-                    break;
-                case 1:
-                    result.addProtectedCruisers();
-                    break;
-                case 2:
-                    result.addCruiserHelicopterCarriers();
-                    break;
-                default:
-                    throw new IllegalValueException();
-            }
-        }
-        return result.build();
     }
 
     @Override
@@ -127,7 +92,7 @@ public class BaseBattleField implements BattleField {
     }
 
     public StringBuilder listCruisersInfo(List<Cruiser> team) {
-        StringBuilder out = new StringBuilder("");
+        StringBuilder out = new StringBuilder();
         for (Cruiser cruiser : team)
             out.append(cruiser.getName()).
                     append(". Осталось жизней: ").
@@ -165,13 +130,5 @@ public class BaseBattleField implements BattleField {
         int result = 0;
         for (Cruiser cruiser : team) result += cruiser.getLife();
         return result;
-    }
-
-    public int chooseCruiser(int size) {
-        return (int) (Math.random() * size);
-    }
-
-    public void setRandomSize(int randomSize) {
-        this.randomSize = randomSize;
     }
 }

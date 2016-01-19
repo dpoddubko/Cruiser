@@ -1,10 +1,11 @@
 package training;
 
 import battleField.BaseBattleField;
+import battleField.ShipsBuilder;
 
 public class BattleFieldApp {
     public static void main(String[] args) {
-        BaseBattleField baseBattleField = new BaseBattleField();
-            baseBattleField.fight();
+        BaseBattleField battleField = new BaseBattleField(ShipsBuilder.createCruisers(), ShipsBuilder.createCruisers());
+            battleField.fight();
     }
 }
