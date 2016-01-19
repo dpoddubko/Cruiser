@@ -40,13 +40,13 @@ public class BaseBattleField implements BattleField {
             if (!hasCharge(whiteTeam) && !hasCharge(blackTeam)) {
                 int whiteSize = whiteTeam.size();
                 int blackSize = blackTeam.size();
-                int whiteLife = lifeSumOfTeam(whiteTeam);
-                int blackLife = lifeSumOfTeam(blackTeam);
                 if (whiteSize > blackSize) {
                     return Variants.WHITE_TEAM_WIN;
                 } else if (whiteSize < blackSize) {
                     return Variants.BLACK_TEAM_WIN;
                 } else if (whiteSize == blackSize) {
+                    int whiteLife = lifeSumOfTeam(whiteTeam);
+                    int blackLife = lifeSumOfTeam(blackTeam);
                     if (whiteLife > blackLife) {
                         return Variants.WHITE_TEAM_WIN;
                     } else if (whiteLife < blackLife) {
