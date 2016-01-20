@@ -30,8 +30,6 @@ public class BattleFieldTest {
         }
     }
 
-
-
     @Test
     public void shipsBuilderNotNullTest() {
         ShipsBuilder shipsBuilder = new ShipsBuilder();
@@ -58,13 +56,10 @@ public class BattleFieldTest {
     public void doRoundNoChargeTest() {
         List<Cruiser> wTeam = new ArrayList<>();
         List<Cruiser> bTeam = new ArrayList<>();
-
-
         wTeam.add(new NullWeaponCruiser());
         wTeam.add(new NullWeaponCruiser());
         bTeam.add(new NullWeaponCruiser());
         BaseBattleField battleField = new BaseBattleField(wTeam, bTeam);
-
         assertEquals(Variants.WHITE_TEAM_WIN, battleField.doRound());
         bTeam.add(new NullWeaponCruiser());
         wTeam.remove(0);
@@ -85,36 +80,31 @@ public class BattleFieldTest {
         wTeam.add(new ProtectedCruiser());
         bTeam.add(new NullWeaponCruiser());
         bTeam.add(new NullWeaponCruiser());
-        BaseBattleField battleField = new BaseBattleField(wTeam,bTeam);
-
+        BaseBattleField battleField = new BaseBattleField(wTeam, bTeam);
         assertEquals(false, battleField.attack(wTeam, bTeam));
         assertEquals(true, battleField.attack(wTeam, bTeam));
     }
 
     @Test
     public void doRoundTest() {
-
         List<Cruiser> wTeam = new ArrayList<>();
         List<Cruiser> bTeam = new ArrayList<>();
         wTeam.add(new ProtectedCruiser());
         bTeam.add(new NullWeaponCruiser());
-        BaseBattleField battleField = new BaseBattleField(wTeam,bTeam);
+        BaseBattleField battleField = new BaseBattleField(wTeam, bTeam);
         assertEquals(Variants.WHITE_TEAM_WIN, battleField.doRound());
-
         List<Cruiser> wTeam1 = new ArrayList<>();
         List<Cruiser> bTeam1 = new ArrayList<>();
         wTeam1.add(new NullWeaponCruiser());
         bTeam1.add(new NullWeaponCruiser());
-        BaseBattleField battleField1 = new BaseBattleField(wTeam1,bTeam1);
+        BaseBattleField battleField1 = new BaseBattleField(wTeam1, bTeam1);
         assertEquals(Variants.TIE, battleField1.doRound());
-
         List<Cruiser> wTeam2 = new ArrayList<>();
         List<Cruiser> bTeam2 = new ArrayList<>();
         wTeam2.add(new NullWeaponCruiser());
         bTeam2.add(new NullWeaponCruiser());
-        BaseBattleField battleField2 = new BaseBattleField(wTeam2,bTeam2);
+        BaseBattleField battleField2 = new BaseBattleField(wTeam2, bTeam2);
         battleField2.getWhiteTeam().get(0).setLife(30);
         assertEquals(Variants.WHITE_TEAM_WIN, battleField2.doRound());
     }
-
 }

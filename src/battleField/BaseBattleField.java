@@ -21,7 +21,6 @@ public class BaseBattleField implements BattleField {
 
     public void fight() {
         logStateTeams();
-
         while (canFight()) {
             doRound();
             logStateTeams();
@@ -31,25 +30,28 @@ public class BaseBattleField implements BattleField {
     @Override
     public Variants doRound() {
         for (int i = 0; i < NUMBER; i++) {
-            if (attack(whiteTeam, blackTeam)) {
+            if (attack(whiteTeam, blackTeam))
                 return Variants.WHITE_TEAM_WIN;
-            }
-            if (attack(blackTeam, whiteTeam)) {
+            if (attack(blackTeam, whiteTeam))
                 return Variants.BLACK_TEAM_WIN;
-            }
             if (!hasCharge(whiteTeam) && !hasCharge(blackTeam)) {
+                Variants result = Variants.TIE;
                 int whiteSize = whiteTeam.size();
                 int blackSize = blackTeam.size();
-                int whiteLife = lifeSumOfTeam(whiteTeam);
-                int blackLife = lifeSumOfTeam(blackTeam);
-                if (whiteSize > blackSize ||
-                        (whiteSize == blackSize && whiteLife > blackLife)) {
-                    return Variants.WHITE_TEAM_WIN;
-                } else if (whiteSize < blackSize ||
-                        (whiteSize == blackSize && whiteLife < blackLife)) {
-                    return Variants.BLACK_TEAM_WIN;
+                if (whiteSize > blackSize) {
+                    result = Variants.WHITE_TEAM_WIN;
+                } else if (whiteSize < blackSize) {
+                    result = Variants.BLACK_TEAM_WIN;
+                } else if (whiteSize == blackSize) {
+                    int whiteLife = lifeSumOfTeam(whiteTeam);
+                    int blackLife = lifeSumOfTeam(blackTeam);
+                    if (whiteLife > blackLife) {
+                        result = Variants.WHITE_TEAM_WIN;
+                    } else if (whiteLife < blackLife) {
+                        result = Variants.BLACK_TEAM_WIN;
+                    }
                 }
-                return Variants.TIE;
+                return result;
             }
         }
         return Variants.CONTINUE;
@@ -76,25 +78,18 @@ public class BaseBattleField implements BattleField {
     }
 
     public String stateTeams(List<Cruiser> team, String colourOfTeam) {
-        String result = new StringBuilder("\n\nКоманда ").
+        StringBuilder result = new StringBuilder("\n\nКоманда ").
                 append(colourOfTeam).
                 append(":\n").
                 append("Крейсер(ы), шт.: ").
                 append(team.size()).
-                append(".\n").
-                append(listCruisersInfo(team)).
-                toString();
-        return result;
-    }
-
-    public StringBuilder listCruisersInfo(List<Cruiser> team) {
-        StringBuilder out = new StringBuilder();
+                append(".\n");
         for (Cruiser cruiser : team)
-            out.append(cruiser.getName()).
+            result.append(cruiser.getName()).
                     append(". Осталось жизней: ").
                     append(cruiser.getLife()).
                     append(".\n");
-        return out;
+        return result.toString();
     }
 
     public boolean canFight() {
