@@ -1,7 +1,4 @@
-package training;
-
-import battleField.BaseBattleField;
-import battleField.ShipsBuilder;
+package battleField;
 
 public class BattleFieldApp {
     public static void main(String[] args) {
